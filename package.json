@@ -12,7 +12,10 @@
   "author": "Harry",
   "license": "ISC",
   "dependencies": {
-    "moment": "^2.30.1"
+    "dotenv": "^16.0.0",
+    "moment": "^2.30.1",
+    "mongodb": "^3.2.6",
+    "mongoose": "^6.2.9"
   },
   "devDependencies": {
     "nodemon": "^3.0.2",
