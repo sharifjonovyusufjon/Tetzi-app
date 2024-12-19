@@ -44,6 +44,7 @@ adminController.processSignup = async (req: Request, res: Response) => {
     res.json({ member: result });
   } catch (err) {
     console.log("Error, processSignup:", err);
+    res.send(err);
   }
 };
 
@@ -55,6 +56,7 @@ adminController.processLogin = async (req: Request, res: Response) => {
     res.json({ member: result });
   } catch (err) {
     console.log("Error, processLogin:", err);
+    res.send(err);
   }
 };
 
