@@ -46,4 +46,10 @@ routerAdmin.post(
   productController.updateProduct
 );
 
+routerAdmin.get(
+  "/product/all",
+  adminController.verifyAdmin,
+  productController.getAllProduct
+);
+
 export default routerAdmin;

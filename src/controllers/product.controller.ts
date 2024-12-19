@@ -41,4 +41,14 @@ productController.updateProduct = async (req: Request, res: Response) => {
   }
 };
 
+productController.getAllProduct = async (req: Request, res: Response) => {
+  try {
+    console.log("getAllProduct");
+    const result = await productService.getAllProduct();
+    res.json({ product: result });
+  } catch (err) {
+    console.log("Error, getAllProduct:", err);
+    res.send(err);
+  }
+};
 export default productController;
