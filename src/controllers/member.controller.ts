@@ -78,7 +78,6 @@ memberController.verifyAuth = async (
     if (!req.member) {
       throw new Errors(HttpCode.UNAUTHORIZED, Message.NOT_AUNTiCANTED);
     }
-
     next();
   } catch (err) {
     console.log("Error, verifyAuth:", err);
@@ -100,6 +99,17 @@ memberController.retriewAuth = async (
     next();
   } catch (err) {
     console.log("Error, retriewAuth:", err);
+    res.send(err);
+  }
+};
+
+memberController.memberDetail = async (req: ExtendedRequest, res: Response) => {
+  try {
+    console.log("memberDetail");
+    const result = await memberService.memberDetail(req.member._id);
+    res.json({ member: result });
+  } catch (err) {
+    console.log("Error, memberDetail:", err);
     res.send(err);
   }
 };

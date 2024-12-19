@@ -1,7 +1,7 @@
 import * as bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { Member } from "../libs/types/member";
-import { AUTH_TIMER } from "../libs/config";
+import { AUTH_TIMER, shapeIntoMongooseObjectId } from "../libs/config";
 import Errors, { HttpCode, Message } from "../libs/Errors";
 
 class AuthService {
@@ -79,7 +79,7 @@ class AuthService {
       this.secretToken
     )) as Member;
     console.log(`----- [AUTH] memberEmail: ${result.memberEmail} ----`);
-
+    result._id = shapeIntoMongooseObjectId(result._id);
     return result;
   }
 }

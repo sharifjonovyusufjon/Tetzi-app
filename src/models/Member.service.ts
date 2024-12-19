@@ -10,6 +10,7 @@ import { HttpCode } from "../libs/Errors";
 import { T } from "../libs/types/common";
 import { MemberStatus, MemberType } from "../libs/enums/member.enum";
 import AuthService from "./Auth.service";
+import { ObjectId } from "mongoose";
 
 class MemberService {
   private readonly memberModel;
@@ -65,7 +66,14 @@ class MemberService {
     return result;
   }
 
-  /* ADMIN */
+  public async memberDetail(input: ObjectId): Promise<Member> {
+    const result = await this.memberModel.findById(input).exec();
+    if (!result) throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
+
+    return result;
+  }
+
+  /* ------- ADMIN ------ */
 
   public async processSignup(input: MemberInput): Promise<Member> {
     try {

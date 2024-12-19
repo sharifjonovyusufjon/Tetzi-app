@@ -6,16 +6,16 @@ const routerAdmin = Router();
 routerAdmin.get("/", adminController.goHome);
 
 routerAdmin
-  .get("/signup", adminController.goSignup)
-  .post("/signup", adminController.processSignup);
+  .get("/member/signup", adminController.goSignup)
+  .post("/member/signup", adminController.processSignup);
 
 routerAdmin
-  .get("/login", adminController.goLogin)
-  .post("/login", adminController.processLogin);
+  .get("/member/login", adminController.goLogin)
+  .post("/member/login", adminController.processLogin);
 
-routerAdmin.get("/logout", adminController.processLogout);
-routerAdmin.get("/checkAdmin", adminController.checkAdmin);
-routerAdmin.get("/verifyAdmin", adminController.verifyAdmin);
+routerAdmin.get("/member/logout", adminController.processLogout);
+routerAdmin.get("/member/checkAdmin", adminController.checkAdmin);
+routerAdmin.get("/member/verifyAdmin", adminController.verifyAdmin);
 
 /* ADMIN MEMBER */
 routerAdmin.get(
