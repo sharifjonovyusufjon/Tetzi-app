@@ -12,7 +12,9 @@
   "author": "Harry",
   "license": "ISC",
   "dependencies": {
+    "@types/bcryptjs": "^2.4.6",
     "@types/morgan": "^1.9.9",
+    "bcryptjs": "^2.4.3",
     "dotenv": "^16.0.0",
     "ejs": "^3.1.6",
     "express": "^4.17.3",
