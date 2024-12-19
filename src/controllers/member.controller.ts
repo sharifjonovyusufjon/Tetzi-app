@@ -7,6 +7,7 @@ const memberService = new MemberService();
 
 memberController.signup = (req: Request, res: Response) => {
   try {
+    console.log("signup");
     res.send("signup");
   } catch (err) {
     console.log("Error, signup:", err);
@@ -15,6 +16,7 @@ memberController.signup = (req: Request, res: Response) => {
 
 memberController.login = (req: Request, res: Response) => {
   try {
+    console.log("login");
     res.send("login");
   } catch (err) {
     console.log("Error, login:", err);
