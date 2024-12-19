@@ -1,7 +1,9 @@
+import MemberService from "../models/Member.service";
 import { T } from "../libs/types/common";
 import { Request, Response } from "express";
 
 const memberController: T = {};
+const memberService = new MemberService();
 
 memberController.signup = (req: Request, res: Response) => {
   try {

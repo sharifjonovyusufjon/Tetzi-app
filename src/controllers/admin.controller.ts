@@ -1,7 +1,9 @@
+import MemberService from "../models/Member.service";
 import { T } from "../libs/types/common";
 import { Request, Response } from "express";
 
 const adminController: T = {};
+const memberService = new MemberService();
 
 adminController.goHome = (req: Request, res: Response) => {
   try {
