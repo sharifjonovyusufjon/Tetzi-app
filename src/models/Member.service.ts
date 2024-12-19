@@ -11,6 +11,39 @@ class MemberService {
     this.memberModel = MemberModel;
   }
 
+  public async signup(input: MemberInput): Promise<Member> {
+    try {
+      const result = await this.memberModel.create(input);
+      if (!result)
+        throw new Errors(HttpCode.BAD_REQUEST, Message.CREATE_FAILED);
+
+      return result;
+    } catch (err) {
+      console.log("Error, signup:", err);
+      throw new Errors(HttpCode.BAD_REQUEST, Message.CREATE_FAILED);
+    }
+  }
+
+  public async login(input: LoginInput): Promise<Member> {
+    const search: T = { memberEmail: input.memberEmail };
+    const result = await this.memberModel.findOne(search).exec();
+    if (!result) {
+      throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
+    }
+
+    if (result.memberStatus === MemberStatus.BLOCK) {
+      throw new Errors(HttpCode.BAD_REQUEST, Message.BLOCKED_USER);
+    }
+
+    if (result.memberStatus === MemberStatus.DELETE) {
+      throw new Errors(HttpCode.BAD_REQUEST, Message.NO_DATA_FOUND);
+    }
+
+    return result;
+  }
+
+  /* ADMIN */
+
   public async processSignup(input: MemberInput): Promise<Member> {
     try {
       const search: T = { memberType: MemberType.ADMIN };
