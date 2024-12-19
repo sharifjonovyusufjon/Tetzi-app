@@ -99,7 +99,7 @@ adminController.verifyAdmin = async (
 ) => {
   try {
     console.log("verifyAdmin");
-    if (req.session?.member) {
+    if (req.session?.member.memberType === MemberType.ADMIN) {
       next();
     } else res.send(Message.NOT_AUNTiCANTED);
   } catch (err) {
