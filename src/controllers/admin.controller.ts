@@ -84,7 +84,7 @@ adminController.checkAdmin = async (req: AdminRequest, res: Response) => {
   try {
     console.log("checkAdmin");
     if (req.session?.member) {
-      res.send(`Hi ${req.session.member.memberEmail}`);
+      res.send(`Your email: ${req.session.member.memberEmail}`);
     } else res.send(Message.NOT_AUNTiCANTED);
   } catch (err) {
     console.log("Error, checkAdmin:", err);
