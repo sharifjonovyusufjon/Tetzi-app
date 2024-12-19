@@ -1,5 +1,5 @@
 import { ObjectId } from "mongoose";
-// import { Session } from "express-session";
+import { Session } from "express-session";
 import {
   MemberCountry,
   MemberState,
@@ -50,10 +50,10 @@ export interface LoginInput {
   memberPassword: string;
 }
 
-// export interface AdminRequest extends Request {
-//   member: Member;
-//   session: Session & { meber: Member };
-// }
+export interface AdminRequest extends Request {
+  member: Member;
+  session: Session & { member: Member };
+}
 
 export interface ExtendedRequest extends Request {
   member: Member;

@@ -5,6 +5,15 @@ import routerAdmin from "./router-admin";
 import morgan from "morgan";
 import { MORGAN_FORMAT } from "./libs/config";
 import cookieParser from "cookie-parser";
+import session from "express-session";
+import ConnectMongoDB from "connect-mongodb-session";
+import { T } from "./libs/types/common";
+
+const MongoDBStore = ConnectMongoDB(session);
+const store = new MongoDBStore({
+  uri: String(process.env.MONGO_URL),
+  collection: "sessions",
+});
 
 // Interens
 
@@ -16,6 +25,24 @@ app.use(cookieParser());
 app.use(morgan(MORGAN_FORMAT));
 
 // Sessions
+
+app.use(
+  session({
+    secret: String(process.env.SESSION_SECRET),
+    cookie: {
+      maxAge: 1000 * 3600 * 3,
+    },
+    store: store,
+    resave: true,
+    saveUninitialized: true,
+  })
+);
+
+app.use(function (req, res, next) {
+  const sessionIntance = req.session as T;
+  res.locals.member = sessionIntance.member;
+  next();
+});
 
 // Views
 
