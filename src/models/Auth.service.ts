@@ -34,7 +34,7 @@ class AuthService {
         return;
       }
 
-      const simplifiedPayload = {
+      const simplifiedPayload: Member = {
         _id: payload._id,
         memberType: payload.memberType,
         memberStatus: payload.memberStatus,
