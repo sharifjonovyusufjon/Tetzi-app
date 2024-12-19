@@ -17,7 +17,18 @@ routerAdmin.get("/logout", adminController.processLogout);
 routerAdmin.get("/checkAdmin", adminController.checkAdmin);
 routerAdmin.get("/verifyAdmin", adminController.verifyAdmin);
 
+/* ADMIN MEMBER */
+routerAdmin.get(
+  "/member/all",
+  adminController.verifyAdmin,
+  adminController.getAllMember
+);
+routerAdmin.post(
+  "/member/update",
+  adminController.verifyAdmin,
+  adminController.updateMember
+);
+
 /* ADMIN PRODUCT */
 
-/* ADMIN USER */
 export default routerAdmin;

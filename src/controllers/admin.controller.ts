@@ -108,4 +108,28 @@ adminController.verifyAdmin = async (
   }
 };
 
+/* member */
+
+adminController.getAllMember = async (req: Request, res: Response) => {
+  try {
+    console.log("getAllMember");
+    const result: Member[] = await memberService.getAllMember();
+    res.json({ members: result });
+  } catch (err) {
+    console.log("Error, getAllMember:", err);
+    res.send(err);
+  }
+};
+
+adminController.updateMember = async (req: Request, res: Response) => {
+  try {
+    console.log("updateMember");
+    const result = await memberService.updateMember(req.body);
+    res.json({ member: result });
+  } catch (err) {
+    console.log("Error, updateMember:", err);
+    res.send(err);
+  }
+};
+
 export default adminController;

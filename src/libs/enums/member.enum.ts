@@ -15,5 +15,11 @@ export enum MemberCountry {
 
 export enum MemberState {
   SEOUL = "SEOUL",
+  BUSAN = "BUSAN",
   DAEGU = "DAEGU",
+  INCHEON = "INCHEON",
+  GWANGJU = "GWANGJU",
+  DAEJON = "DAEJON",
+  ULSAN = "ULSAN",
+  SEJONG = "SEJONG",
 }

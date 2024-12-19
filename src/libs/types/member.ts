@@ -45,6 +45,21 @@ export interface Member {
   updatedAt?: Date;
 }
 
+export interface UpdateMemberInput {
+  _id: string;
+  memberStatus?: MemberStatus;
+  memberFirstName?: string;
+  memberLastName?: string;
+  memberEmail?: string;
+  memberPhone?: string;
+  memberAddress?: string[];
+  memberCity?: string;
+  memberCountry?: MemberCountry;
+  memberState?: MemberState;
+  memberPostCode?: number;
+  memberPoints?: number;
+}
+
 export interface LoginInput {
   memberEmail: string;
   memberPassword: string;

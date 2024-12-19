@@ -1,5 +1,10 @@
 import Errors, { Message } from "../libs/Errors";
-import { LoginInput, Member, MemberInput } from "../libs/types/member";
+import {
+  LoginInput,
+  Member,
+  MemberInput,
+  UpdateMemberInput,
+} from "../libs/types/member";
 import MemberModel from "../schema/Member.model";
 import { HttpCode } from "../libs/Errors";
 import { T } from "../libs/types/common";
@@ -111,6 +116,25 @@ class MemberService {
     }
 
     const result = await this.memberModel.findOne(search);
+    return result;
+  }
+
+  /* ADMIN MEMBER */
+
+  public async getAllMember(): Promise<Member[]> {
+    const result = await this.memberModel
+      .find({ memberType: MemberType.USER })
+      .exec();
+    if (!result.length)
+      throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
+    return result;
+  }
+
+  public async updateMember(input: UpdateMemberInput): Promise<Member> {
+    const result = await this.memberModel
+      .findByIdAndUpdate(input._id, input, { new: true })
+      .exec();
+    if (!result) throw new Errors(HttpCode.BAD_REQUEST, Message.UPDATE_FAILED);
     return result;
   }
 }
