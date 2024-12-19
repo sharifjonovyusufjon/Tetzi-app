@@ -82,4 +82,9 @@ const productSchema = new Schema(
   { timestamps: true }
 );
 
+productSchema.index(
+  { productName: 1, ProductSize: 1, ProductBrand: 1, ProductCategory: 1 },
+  { unique: true }
+);
+
 export default mongoose.model("Product", productSchema);
