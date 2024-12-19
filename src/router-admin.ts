@@ -1,5 +1,6 @@
 import { Router } from "express";
 import adminController from "./controllers/admin.controller";
+import makeUploader from "./libs/utils/uploader";
 const routerAdmin = Router();
 
 /* ADMIN */
@@ -30,5 +31,12 @@ routerAdmin.post(
 );
 
 /* ADMIN PRODUCT */
+
+// routerAdmin.post(
+//   "/product/create",
+//   adminController.verifyAdmin,
+//   makeUploader("products").array("productImages", 5),
+//   adminController.createProduct
+// );
 
 export default routerAdmin;
