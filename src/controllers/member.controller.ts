@@ -103,10 +103,32 @@ memberController.retriewAuth = async (
   }
 };
 
+memberController.getAdmin = async (req: Request, res: Response) => {
+  try {
+    console.log("getAdmin");
+    const result = await memberService.getAdmin();
+    res.json({ member: result });
+  } catch (err) {
+    console.log("Error, getAdmin:", err);
+    res.send(err);
+  }
+};
+
 memberController.memberDetail = async (req: ExtendedRequest, res: Response) => {
   try {
     console.log("memberDetail");
     const result = await memberService.memberDetail(req.member._id);
+    res.json({ member: result });
+  } catch (err) {
+    console.log("Error, memberDetail:", err);
+    res.send(err);
+  }
+};
+
+memberController.memberUpdate = async (req: ExtendedRequest, res: Response) => {
+  try {
+    console.log("memberUpdate");
+    const result = await memberService.memberUpdate(req.member._id, req.body);
     res.json({ member: result });
   } catch (err) {
     console.log("Error, memberDetail:", err);

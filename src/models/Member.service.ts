@@ -66,8 +66,29 @@ class MemberService {
     return result;
   }
 
+  public async getAdmin(): Promise<Member> {
+    const result = await this.memberModel.findOne({
+      memberType: MemberType.ADMIN,
+    });
+    if (!result) throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
+
+    return result;
+  }
+
   public async memberDetail(input: ObjectId): Promise<Member> {
     const result = await this.memberModel.findById(input).exec();
+    if (!result) throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
+
+    return result;
+  }
+
+  public async memberUpdate(
+    memberId: ObjectId,
+    input: UpdateMemberInput
+  ): Promise<Member> {
+    const result = await this.memberModel
+      .findByIdAndUpdate(memberId, input, { new: true })
+      .exec();
     if (!result) throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
 
     return result;

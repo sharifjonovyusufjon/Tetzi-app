@@ -14,10 +14,18 @@ router.get("/member/retriew", memberController.retriewAuth);
 
 /* MEMBER */
 
+router.get("/member/admin", memberController.getAdmin);
+
 router.get(
   "/member/detail",
   memberController.verifyAuth,
   memberController.memberDetail
+);
+
+router.post(
+  "/member/update",
+  memberController.verifyAuth,
+  memberController.memberUpdate
 );
 
 /* PRODUCT */
