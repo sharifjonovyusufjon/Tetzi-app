@@ -1,7 +1,7 @@
 import MemberService from "../models/Member.service";
 import { T } from "../libs/types/common";
 import { Request, Response } from "express";
-import { MemberInput } from "../libs/types/member";
+import { LoginInput, MemberInput } from "../libs/types/member";
 import { Member } from "../libs/types/member";
 import { MemberType } from "../libs/enums/member.enum";
 
@@ -47,10 +47,12 @@ adminController.processSignup = async (req: Request, res: Response) => {
   }
 };
 
-adminController.processLogin = (req: Request, res: Response) => {
+adminController.processLogin = async (req: Request, res: Response) => {
   try {
     console.log("processLogin");
-    res.send("processLogin");
+    const member: LoginInput = req.body;
+    const result: Member = await memberService.processLogin(member);
+    res.json({ member: result });
   } catch (err) {
     console.log("Error, processLogin:", err);
   }

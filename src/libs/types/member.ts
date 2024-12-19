@@ -31,7 +31,7 @@ export interface Member {
   memberLastName: string;
   memberEmail: string;
   memberPhone: string;
-  memberPassword: string;
+  memberPassword?: string;
   memberImage?: string;
   memberAddress: string[];
   memberCity: string;
@@ -41,4 +41,9 @@ export interface Member {
   memberPoints: number;
   createdAt?: Date;
   updatedAt?: Date;
+}
+
+export interface LoginInput {
+  memberEmail: string;
+  memberPassword: string;
 }
