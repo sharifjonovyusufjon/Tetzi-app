@@ -40,4 +40,10 @@ routerAdmin.post(
   productController.createProduct
 );
 
+routerAdmin.post(
+  "/product/update/:id",
+  adminController.verifyAdmin,
+  productController.updateProduct
+);
+
 export default routerAdmin;
