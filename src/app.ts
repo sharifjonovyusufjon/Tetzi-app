@@ -23,6 +23,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());
 app.use(morgan(MORGAN_FORMAT));
+app.use("/uploads", express.static("./uploads"));
 
 // Sessions
 
