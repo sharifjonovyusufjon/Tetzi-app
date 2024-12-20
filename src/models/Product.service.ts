@@ -1,8 +1,10 @@
-import { ProductStatus } from "../libs/enums/product.enum";
+import { T } from "../libs/types/common";
+import { Direction, ProductStatus } from "../libs/enums/product.enum";
 import Errors, { HttpCode, Message } from "../libs/Errors";
 import {
   Product,
   ProductInput,
+  ProductInQuery,
   UpdateProductInput,
 } from "../libs/types/product";
 import ProductModel from "../schema/Product.model";
@@ -31,6 +33,42 @@ class ProductService {
     }
 
     return productTarget;
+  }
+
+  public async getProducts(
+    memberId: ObjectId,
+    input: ProductInQuery
+  ): Promise<Product[]> {
+    const match: T = { productStatus: ProductStatus.PROCESS };
+    const sort: T = {
+      [input?.sort ?? "createdAt"]: input?.direction ?? Direction.DESC,
+    };
+
+    this.matchQuery(match, input);
+    console.log("match", match);
+    console.log("sort", sort);
+    const result = await this.productModel
+      .aggregate([
+        { $match: match },
+        { $sort: sort },
+        { $skip: (input.page - 1) * input.limit },
+        { $limit: input.limit },
+      ])
+      .exec();
+
+    return result.length ? result : [];
+  }
+
+  private matchQuery(match: T, input: ProductInQuery): void {
+    const { productBrand, productCategory, productColor, productPrice, text } =
+      input.search;
+
+    if (productCategory) match.productCategory = productCategory;
+    if (productColor) match.productColor = productColor;
+    if (productBrand) match.productBrand = productBrand;
+    if (productPrice)
+      match.productPrice = { $gte: productPrice.start, $lte: productPrice.end };
+    if (text) match.productName = { $regex: new RegExp(text, "i") };
   }
 
   /* ------- ADMIN ------ */

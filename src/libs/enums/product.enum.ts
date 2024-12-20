@@ -42,3 +42,8 @@ export enum ProductColor {
   PINK = "PINK",
   ORANGE = "ORANGE",
 }
+
+export enum Direction {
+  ASC = 1,
+  DESC = -1,
+}

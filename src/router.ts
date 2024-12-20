@@ -32,6 +32,12 @@ router.post(
 /* PRODUCT */
 
 router.get(
+  "/product/all",
+  memberController.retriewAuth,
+  productController.getProducts
+);
+
+router.get(
   "/product/:id",
   memberController.retriewAuth,
   productController.getProduct

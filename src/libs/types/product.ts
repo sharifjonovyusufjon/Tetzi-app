@@ -1,5 +1,6 @@
 import { ObjectId } from "mongoose";
 import {
+  Direction,
   ProductBrand,
   ProductCategory,
   ProductColor,
@@ -51,4 +52,25 @@ export interface UpdateProductInput {
   productColor?: ProductColor;
   productCount?: number;
   productSize?: ProductSize;
+}
+
+interface PriceRange {
+  start?: number;
+  end?: number;
+}
+
+interface AlSearch {
+  productCategory?: ProductCategory;
+  productColor?: ProductColor;
+  productBrand?: ProductBrand;
+  productPrice?: PriceRange;
+  text?: string;
+}
+
+export interface ProductInQuery {
+  page: number;
+  sort?: string;
+  direction?: Direction;
+  limit: number;
+  search: AlSearch;
 }
