@@ -1,4 +1,4 @@
-import { AdminRequest } from "../libs/types/member";
+import { AdminRequest, ExtendedRequest } from "../libs/types/member";
 import { Request, Response } from "express";
 import { T } from "../libs/types/common";
 import Errors, { HttpCode, Message } from "../libs/Errors";
@@ -8,6 +8,20 @@ import { shapeIntoMongooseObjectId } from "../libs/config";
 
 const productController: T = {};
 const productService = new ProductService();
+
+productController.getProduct = async (req: ExtendedRequest, res: Response) => {
+  try {
+    console.log("getProduct");
+    const productId = shapeIntoMongooseObjectId(req.params.id)
+    const result = await productService.getProduct(req.member._id, productId)
+    res.json({product: result})
+  } catch (err) {
+    console.log("Error, getProduct:", err);
+    res.send(err);
+  }
+};
+
+/* ------- ADMIN ------ */
 
 productController.createProduct = async (req: AdminRequest, res: Response) => {
   try {

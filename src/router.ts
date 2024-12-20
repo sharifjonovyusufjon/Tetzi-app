@@ -1,5 +1,6 @@
 import { Router } from "express";
 import memberController from "./controllers/member.controller";
+import productController from "./controllers/product.controller";
 const router = Router();
 
 router.post("/member/signup", memberController.signup);
@@ -29,5 +30,11 @@ router.post(
 );
 
 /* PRODUCT */
+
+router.get(
+  "/product/:id",
+  memberController.retriewAuth,
+  productController.getProduct
+);
 
 export default router;

@@ -1,3 +1,4 @@
+import { ProductStatus } from "../libs/enums/product.enum";
 import Errors, { HttpCode, Message } from "../libs/Errors";
 import {
   Product,
@@ -5,11 +6,31 @@ import {
   UpdateProductInput,
 } from "../libs/types/product";
 import ProductModel from "../schema/Product.model";
+import { ObjectId } from "mongoose";
 
 class ProductService {
   private readonly productModel;
   constructor() {
     this.productModel = ProductModel;
+  }
+
+  public async getProduct(
+    memberId: ObjectId,
+    productId: ObjectId
+  ): Promise<Product> {
+    const productTarget = await this.productModel.findOne({
+      _id: productId,
+      productStatus: ProductStatus.PROCESS,
+    });
+
+    if (!productTarget)
+      throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
+
+    if (memberId) {
+      // view integration
+    }
+
+    return productTarget;
   }
 
   /* ------- ADMIN ------ */
