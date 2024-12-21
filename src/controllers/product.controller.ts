@@ -79,7 +79,7 @@ productController.getBestSeller = async (
     } else {
       memberId = shapeIntoMongooseObjectId(req.member._id);
     }
-    
+
     const result = await productService.getBestSeller(memberId, input);
     res.json(result);
   } catch (err) {
