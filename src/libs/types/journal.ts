@@ -1,4 +1,4 @@
-import { JournalStatus } from "../enums/journal.enum";
+import { JournalCategory, JournalStatus } from "../enums/journal.enum";
 import { ObjectId } from "mongoose";
 
 export interface JournalInput {
@@ -6,11 +6,13 @@ export interface JournalInput {
   journalTitle: string;
   journalContext: string;
   journalImage?: string;
+  journalCategory: JournalCategory;
 }
 
 export interface Journal {
   _id: ObjectId;
   journalStatus: JournalStatus;
+  journalCategory: JournalCategory;
   journalTitle: string;
   journalContext: string;
   journalImage?: string;
@@ -24,7 +26,19 @@ export interface Journal {
 export interface UpdateJournalInput {
   _id: ObjectId;
   journalStatus?: JournalStatus;
+  journalCategory?: JournalCategory;
   journalTitle?: string;
   journalContext?: string;
   journalImage?: string;
+}
+
+export interface AllSearchJournal {
+  text?: string;
+  journalCategory?: JournalCategory;
+}
+
+export interface JournalInQuiry {
+  page: number;
+  limit: number;
+  search: AllSearchJournal;
 }

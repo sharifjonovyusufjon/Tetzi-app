@@ -1,5 +1,5 @@
 import mongoose, { Schema } from "mongoose";
-import { JournalStatus } from "../libs/enums/journal.enum";
+import { JournalCategory, JournalStatus } from "../libs/enums/journal.enum";
 
 const journalSchema = new Schema(
   {
@@ -9,8 +9,14 @@ const journalSchema = new Schema(
       default: JournalStatus.PAUSE,
     },
 
+    journalCategory: {
+      type: String,
+      enum: JournalCategory,
+    },
+
     journalTitle: {
       type: String,
+      index: { unique: true, sparse: true },
       required: true,
     },
 

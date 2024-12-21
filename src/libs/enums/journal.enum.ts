@@ -3,3 +3,10 @@ export enum JournalStatus {
   PROCESS = "PROCESS",
   DELETE = "DELETE",
 }
+
+export enum JournalCategory {
+  TOYS = "TOYS",
+  CLOTHES = "CLOTHES",
+  PAMPERS = "PAMPERS",
+  STROLLER = "STROLLER",
+}

@@ -1,6 +1,7 @@
 import { Router } from "express";
 import memberController from "./controllers/member.controller";
 import productController from "./controllers/product.controller";
+import journalController from "./controllers/journal.controller";
 const router = Router();
 
 router.post("/member/signup", memberController.signup);
@@ -47,6 +48,14 @@ router.get(
   "/product/:id",
   memberController.retriewAuth,
   productController.getProduct
+);
+
+/* JOURNAL */
+
+router.get(
+  "/journal/all",
+  memberController.retriewAuth,
+  journalController.getJournals
 );
 
 export default router;

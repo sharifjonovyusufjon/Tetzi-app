@@ -1,11 +1,15 @@
+import { T } from "../libs/types/common";
 import Errors, { HttpCode, Message } from "../libs/Errors";
 import {
   Journal,
   JournalInput,
+  JournalInQuiry,
   UpdateJournalInput,
 } from "../libs/types/journal";
 import JournalModel from "../schema/Journal.model";
 import ViewService from "./View.service";
+import { JournalStatus } from "../libs/enums/journal.enum";
+import { ObjectId } from "mongoose";
 
 class JournalService {
   private readonly journalModel;
@@ -13,6 +17,31 @@ class JournalService {
   constructor() {
     this.journalModel = JournalModel;
     this.viewService = new ViewService();
+  }
+
+  public async getJournals(
+    memberId: ObjectId,
+    input: JournalInQuiry
+  ): Promise<Journal[]> {
+    const { page, limit, search } = input;
+    const { text, journalCategory } = input.search;
+
+    const match: T = { journalStatus: JournalStatus.PROCESS };
+    const sort: T = { createdAt: -1 };
+
+    if (journalCategory) match.journalCategory = journalCategory;
+    if (text) match.journalTitle = { $regex: new RegExp(text, "i") };
+
+    const result = await this.journalModel
+      .aggregate([
+        { $match: match },
+        { $sort: sort },
+        { $skip: (input.page - 1) * input.limit },
+        { $limit: input.limit },
+      ])
+      .exec();
+
+    return result.length ? result : [];
   }
 
   /* ------- ADMIN ------ */

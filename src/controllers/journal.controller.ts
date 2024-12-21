@@ -2,12 +2,42 @@ import { Request, Response } from "express";
 import { T } from "../libs/types/common";
 import { AdminRequest } from "../libs/types/member";
 import Errors, { HttpCode, Message } from "../libs/Errors";
-import { JournalInput, UpdateJournalInput } from "../libs/types/journal";
+import {
+  JournalInput,
+  JournalInQuiry,
+  UpdateJournalInput,
+} from "../libs/types/journal";
 import JournalService from "../models/Journal.service";
 import { shapeIntoMongooseObjectId } from "../libs/config";
 
 const journalController: T = {};
 const journalService = new JournalService();
+
+journalController.getJournals = async (req: AdminRequest, res: Response) => {
+  try {
+    console.log("getJournals");
+    const { page, limit, search } = req.query;
+
+    const input: JournalInQuiry = {
+      page: Number(page),
+      limit: Number(limit),
+      search: {},
+    };
+
+    let memberId;
+    if (req.member === undefined) {
+      memberId = null;
+    } else {
+      memberId = shapeIntoMongooseObjectId(req.member._id);
+    }
+
+    const result = await journalService.getJournals(memberId, input);
+    res.json(result);
+  } catch (err) {
+    console.log("Error, getJournals:", err);
+    res.send(err);
+  }
+};
 
 /* ================= ADMIN ===================== */
 
