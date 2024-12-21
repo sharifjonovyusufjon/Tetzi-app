@@ -10,11 +10,17 @@ import {
 } from "../libs/types/product";
 import ProductModel from "../schema/Product.model";
 import { ObjectId } from "mongoose";
+import ViewService from "./View.service";
+import { ViewInput } from "../libs/types/view";
+import { ViewGroup } from "../libs/enums/view.num";
+import { StatatisEditor } from "../libs/config";
 
 class ProductService {
   private readonly productModel;
+  private readonly viewService;
   constructor() {
     this.productModel = ProductModel;
+    this.viewService = new ViewService();
   }
 
   public async getProduct(
@@ -31,10 +37,31 @@ class ProductService {
       throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
 
     if (memberId) {
-      // view integration
+      const viewInput: ViewInput = {
+        viewGroup: ViewGroup.PRODUCT,
+        memberId: memberId,
+        viewRefId: productId,
+      };
+      const newView = await this.viewService.checkView(viewInput);
+      if (newView) {
+        this.productStatisEditor({
+          _id: productId,
+          targetKey: "productViews",
+          modifier: 1,
+        });
+
+        productTarget.productViews++;
+      }
     }
 
     return productTarget;
+  }
+
+  private async productStatisEditor(input: StatatisEditor): Promise<void> {
+    const { _id, targetKey, modifier } = input;
+    return await this.productModel
+      .findByIdAndUpdate(_id, { [targetKey]: modifier }, { new: true })
+      .exec();
   }
 
   public async getProducts(

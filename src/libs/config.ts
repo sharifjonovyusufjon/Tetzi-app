@@ -7,3 +7,10 @@ export const shapeIntoMongooseObjectId = (target: any) => {
     ? new mongoose.Types.ObjectId(target)
     : target;
 };
+
+import { ObjectId } from "mongoose";
+export interface StatatisEditor {
+  _id: ObjectId;
+  targetKey: string;
+  modifier: number;
+}
