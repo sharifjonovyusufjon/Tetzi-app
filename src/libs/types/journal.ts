@@ -22,7 +22,7 @@ export interface Journal {
 }
 
 export interface UpdateJournalInput {
-  _id?: ObjectId;
+  _id: ObjectId;
   journalStatus?: JournalStatus;
   journalTitle?: string;
   journalContext?: string;

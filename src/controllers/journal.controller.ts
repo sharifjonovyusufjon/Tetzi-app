@@ -1,0 +1,56 @@
+import { Request, Response } from "express";
+import { T } from "../libs/types/common";
+import { AdminRequest } from "../libs/types/member";
+import Errors, { HttpCode, Message } from "../libs/Errors";
+import { JournalInput, UpdateJournalInput } from "../libs/types/journal";
+import JournalService from "../models/Journal.service";
+import { shapeIntoMongooseObjectId } from "../libs/config";
+
+const journalController: T = {};
+const journalService = new JournalService();
+
+/* ================= ADMIN ===================== */
+
+journalController.createJournal = async (req: AdminRequest, res: Response) => {
+  try {
+    console.log("createJournal");
+    if (!req.file)
+      throw new Errors(HttpCode.INTERNAL_SERVER_ERROR, Message.CREATE_FAILED);
+
+    const input: JournalInput = req.body;
+    input.journalImage = req.file.path.replace(/\\/g, "/");
+
+    const result = await journalService.createJournal(input);
+    res.json({ journal: result });
+  } catch (err) {
+    console.log("Error, createJournal:", err);
+    res.send(err);
+  }
+};
+
+journalController.updateJournal = async (req: Request, res: Response) => {
+  try {
+    console.log("updateJournal");
+    console.log("id", req.params.id);
+    const input: UpdateJournalInput = req.body;
+    input._id = shapeIntoMongooseObjectId(req.params.id);
+    const result = await journalService.updateJournal(input);
+    res.json({ journal: result });
+  } catch (err) {
+    console.log("Error, updateJournal:", err);
+    res.send(err);
+  }
+};
+
+journalController.getAllJournal = async (req: Request, res: Response) => {
+  try {
+    console.log("getAllProduct");
+    const result = await journalService.getAllJournal();
+    res.json({ journal: result });
+  } catch (err) {
+    console.log("Error, getAllJournal:", err);
+    res.send(err);
+  }
+};
+
+export default journalController;

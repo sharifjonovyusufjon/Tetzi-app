@@ -2,6 +2,7 @@ import { Router } from "express";
 import adminController from "./controllers/admin.controller";
 import makeUploader from "./libs/utils/uploader";
 import productController from "./controllers/product.controller";
+import journalController from "./controllers/journal.controller";
 const routerAdmin = Router();
 
 /* ADMIN */
@@ -50,6 +51,27 @@ routerAdmin.get(
   "/product/all",
   adminController.verifyAdmin,
   productController.getAllProduct
+);
+
+/* ADMIN JOURNAL */
+
+routerAdmin.post(
+  "/journal/create",
+  adminController.verifyAdmin,
+  makeUploader("journals").single("journalImage"),
+  journalController.createJournal
+);
+
+routerAdmin.post(
+  "/journal/update/:id",
+  adminController.verifyAdmin,
+  journalController.updateJournal
+);
+
+routerAdmin.get(
+  "/journal/all",
+  adminController.verifyAdmin,
+  journalController.getAllJournal
 );
 
 export default routerAdmin;
