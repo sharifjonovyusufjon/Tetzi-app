@@ -10,7 +10,11 @@ routerAdmin.get("/", adminController.goHome);
 
 routerAdmin
   .get("/member/signup", adminController.goSignup)
-  .post("/member/signup", adminController.processSignup);
+  .post(
+    "/member/signup",
+    makeUploader("members").single("memberImage"),
+    adminController.processSignup
+  );
 
 routerAdmin
   .get("/member/login", adminController.goLogin)

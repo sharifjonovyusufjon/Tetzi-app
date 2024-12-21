@@ -2,6 +2,7 @@ import { Router } from "express";
 import memberController from "./controllers/member.controller";
 import productController from "./controllers/product.controller";
 import journalController from "./controllers/journal.controller";
+import makeUploader from "./libs/utils/uploader";
 const router = Router();
 
 router.post("/member/signup", memberController.signup);
@@ -27,6 +28,7 @@ router.get(
 router.post(
   "/member/update",
   memberController.verifyAuth,
+  makeUploader("members").single("memberImage"),
   memberController.memberUpdate
 );
 

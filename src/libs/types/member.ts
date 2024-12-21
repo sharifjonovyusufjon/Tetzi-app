@@ -52,6 +52,7 @@ export interface UpdateMemberInput {
   memberLastName?: string;
   memberEmail?: string;
   memberPhone?: string;
+  memberImage?: string;
   memberAddress?: string[];
   memberCity?: string;
   memberCountry?: MemberCountry;

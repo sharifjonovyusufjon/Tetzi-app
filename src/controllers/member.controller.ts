@@ -6,6 +6,7 @@ import {
   LoginInput,
   Member,
   MemberInput,
+  UpdateMemberInput,
 } from "../libs/types/member";
 import AuthService from "../models/Auth.service";
 import { AUTH_TIMER, shapeIntoMongooseObjectId } from "../libs/config";
@@ -128,7 +129,14 @@ memberController.memberDetail = async (req: ExtendedRequest, res: Response) => {
 memberController.memberUpdate = async (req: ExtendedRequest, res: Response) => {
   try {
     console.log("memberUpdate");
-    const result = await memberService.memberUpdate(req.member._id, req.body);
+
+    if (!req.file)
+      throw new Errors(HttpCode.INTERNAL_SERVER_ERROR, Message.CREATE_FAILED);
+
+    const input: UpdateMemberInput = req.body;
+    input.memberImage = req.file.path.replace(/\\/g, "/");
+
+    const result = await memberService.memberUpdate(req.member._id, input);
     res.json({ member: result });
   } catch (err) {
     console.log("Error, memberDetail:", err);

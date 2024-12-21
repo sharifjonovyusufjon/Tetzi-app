@@ -40,6 +40,7 @@ adminController.processSignup = async (req: AdminRequest, res: Response) => {
   try {
     console.log("processSignup");
     const newMember: MemberInput = req.body;
+    newMember.memberImage = req.file.path.replace(/\\/g, "/");
     newMember.memberType = MemberType.ADMIN;
     const result: Member = await memberService.processSignup(newMember);
 
