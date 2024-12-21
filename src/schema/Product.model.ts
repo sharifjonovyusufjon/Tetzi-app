@@ -73,6 +73,11 @@ const productSchema = new Schema(
       default: 0,
     },
 
+    productRank: {
+      type: Number,
+      default: 0,
+    },
+
     productSize: {
       type: String,
       enum: ProductSize,

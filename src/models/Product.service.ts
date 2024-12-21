@@ -3,6 +3,7 @@ import { Direction, ProductStatus } from "../libs/enums/product.enum";
 import Errors, { HttpCode, Message } from "../libs/Errors";
 import {
   Product,
+  ProductBestSellerInQuery,
   ProductInput,
   ProductInQuery,
   UpdateProductInput,
@@ -17,9 +18,10 @@ class ProductService {
   }
 
   public async getProduct(
-    memberId: ObjectId,
+    memberId: ObjectId | null,
     productId: ObjectId
   ): Promise<Product> {
+    console.log(productId);
     const productTarget = await this.productModel.findOne({
       _id: productId,
       productStatus: ProductStatus.PROCESS,
@@ -36,7 +38,7 @@ class ProductService {
   }
 
   public async getProducts(
-    memberId: ObjectId,
+    memberId: ObjectId | null,
     input: ProductInQuery
   ): Promise<Product[]> {
     const match: T = { productStatus: ProductStatus.PROCESS };
@@ -45,8 +47,29 @@ class ProductService {
     };
 
     this.matchQuery(match, input);
-    console.log("match", match);
-    console.log("sort", sort);
+
+    const result = await this.productModel
+      .aggregate([
+        { $match: match },
+        { $sort: sort },
+        { $skip: (input.page - 1) * input.limit },
+        { $limit: input.limit },
+      ])
+      .exec();
+
+    return result.length ? result : [];
+  }
+
+  public async getBestSeller(
+    memberId: ObjectId | null,
+    input: ProductBestSellerInQuery
+  ): Promise<Product[]> {
+    const match: T = {
+      productStatus: ProductStatus.PROCESS,
+      productRank: { $gte: 1 },
+    };
+    const sort: T = { productRank: Direction.DESC };
+
     const result = await this.productModel
       .aggregate([
         { $match: match },

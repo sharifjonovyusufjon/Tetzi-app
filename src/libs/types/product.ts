@@ -36,6 +36,7 @@ export interface Product {
   productComments: number;
   productLikes: number;
   productViews: number;
+  productRank: number;
   createdAt?: Date;
   updatedAt?: Date;
 }
@@ -73,4 +74,9 @@ export interface ProductInQuery {
   direction?: Direction;
   limit: number;
   search: AlSearch;
+}
+
+export interface ProductBestSellerInQuery {
+  page: number;
+  limit: number;
 }

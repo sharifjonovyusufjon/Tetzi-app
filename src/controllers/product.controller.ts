@@ -3,12 +3,14 @@ import { Request, Response } from "express";
 import { T } from "../libs/types/common";
 import Errors, { HttpCode, Message } from "../libs/Errors";
 import {
+  ProductBestSellerInQuery,
   ProductInput,
   ProductInQuery,
   UpdateProductInput,
 } from "../libs/types/product";
 import ProductService from "../models/Product.service";
 import { shapeIntoMongooseObjectId } from "../libs/config";
+import { ObjectId } from "mongoose";
 
 const productController: T = {};
 const productService = new ProductService();
@@ -16,8 +18,16 @@ const productService = new ProductService();
 productController.getProduct = async (req: ExtendedRequest, res: Response) => {
   try {
     console.log("getProduct");
+    let memberId;
+    if (req.member === undefined) {
+      memberId = null;
+    } else {
+      memberId = shapeIntoMongooseObjectId(req.member._id);
+    }
+
+    console.log("memberid:", memberId);
     const productId = shapeIntoMongooseObjectId(req.params.id);
-    const result = await productService.getProduct(req.member._id, productId);
+    const result = await productService.getProduct(memberId, productId);
     res.json({ product: result });
   } catch (err) {
     console.log("Error, getProduct:", err);
@@ -37,10 +47,43 @@ productController.getProducts = async (req: ExtendedRequest, res: Response) => {
       search: {},
     };
 
-    const result = await productService.getProducts(req.member._id, input);
+    let memberId;
+    if (req.member === undefined) {
+      memberId = null;
+    } else {
+      memberId = shapeIntoMongooseObjectId(req.member._id);
+    }
+    const result = await productService.getProducts(memberId, input);
     res.json(result);
   } catch (err) {
     console.log("Error, getProducts:", err);
+    res.send(err);
+  }
+};
+
+productController.getBestSeller = async (
+  req: ExtendedRequest,
+  res: Response
+) => {
+  try {
+    console.log("getBestSeller");
+    const { page, limit } = req.query;
+    const input: ProductBestSellerInQuery = {
+      page: Number(page),
+      limit: Number(limit),
+    };
+
+    let memberId;
+    if (req.member === undefined) {
+      memberId = null;
+    } else {
+      memberId = shapeIntoMongooseObjectId(req.member._id);
+    }
+    
+    const result = await productService.getBestSeller(memberId, input);
+    res.json(result);
+  } catch (err) {
+    console.log("Error, getBestSeller:", err);
     res.send(err);
   }
 };

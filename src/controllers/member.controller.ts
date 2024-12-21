@@ -8,7 +8,7 @@ import {
   MemberInput,
 } from "../libs/types/member";
 import AuthService from "../models/Auth.service";
-import { AUTH_TIMER } from "../libs/config";
+import { AUTH_TIMER, shapeIntoMongooseObjectId } from "../libs/config";
 import Errors, { HttpCode, Message } from "../libs/Errors";
 
 const memberController: T = {};
