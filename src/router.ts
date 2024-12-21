@@ -58,4 +58,10 @@ router.get(
   journalController.getJournals
 );
 
+router.get(
+  "/journal/:id",
+  memberController.retriewAuth,
+  journalController.getJournal
+);
+
 export default router;

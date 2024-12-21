@@ -10,6 +10,9 @@ import JournalModel from "../schema/Journal.model";
 import ViewService from "./View.service";
 import { JournalStatus } from "../libs/enums/journal.enum";
 import { ObjectId } from "mongoose";
+import { ViewInput } from "../libs/types/view";
+import { ViewGroup } from "../libs/enums/view.num";
+import { StatatisEditor } from "../libs/config";
 
 class JournalService {
   private readonly journalModel;
@@ -17,6 +20,46 @@ class JournalService {
   constructor() {
     this.journalModel = JournalModel;
     this.viewService = new ViewService();
+  }
+
+  public async getJournal(
+    memberId: ObjectId | null,
+    journalId: ObjectId
+  ): Promise<Journal> {
+    const journalTarget = await this.journalModel.findOne({
+      _id: journalId,
+      journalStatus: JournalStatus.PROCESS,
+    });
+
+    if (!journalTarget)
+      throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
+
+    if (memberId) {
+      const viewInput: ViewInput = {
+        viewGroup: ViewGroup.PRODUCT,
+        memberId: memberId,
+        viewRefId: journalId,
+      };
+      const newView = await this.viewService.checkView(viewInput);
+      if (newView) {
+        this.journalStatisEditor({
+          _id: journalId,
+          targetKey: "journalViews",
+          modifier: 1,
+        });
+
+        journalTarget.journalViews++;
+      }
+    }
+
+    return journalTarget;
+  }
+
+  private async journalStatisEditor(input: StatatisEditor): Promise<void> {
+    const { _id, targetKey, modifier } = input;
+    return await this.journalModel
+      .findByIdAndUpdate(_id, { [targetKey]: modifier }, { new: true })
+      .exec();
   }
 
   public async getJournals(
