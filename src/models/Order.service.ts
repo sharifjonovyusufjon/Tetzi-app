@@ -4,6 +4,7 @@ import Errors, { HttpCode, Message } from "../libs/Errors";
 import {
   Order,
   OrderInQuiry,
+  OrderItem,
   OrderItemInput,
   UpdateOrder,
 } from "../libs/types/order";
@@ -11,13 +12,16 @@ import OrderModel from "../schema/Order.model";
 import OrderItemModel from "../schema/OrderItem.model";
 import { ObjectId } from "mongoose";
 import { shapeIntoMongooseObjectId } from "../libs/config";
+import ProductService from "./Product.service";
 
 class OrderService {
   private readonly orderModel;
   private readonly orderItemModel;
+  private readonly productService;
   constructor() {
     this.orderModel = OrderModel;
     this.orderItemModel = OrderItemModel;
+    this.productService = new ProductService();
   }
 
   public async createOrder(
@@ -108,7 +112,7 @@ class OrderService {
     const { orderId, orderStatus } = input;
 
     const _id = shapeIntoMongooseObjectId(orderId);
-    const result = await this.orderModel
+    const result: Order = await this.orderModel
       .findOneAndUpdate(
         { _id: _id, memberId: memberId },
         { orderStatus: orderStatus },
@@ -117,7 +121,26 @@ class OrderService {
       .exec();
     if (!result)
       throw new Errors(HttpCode.INTERNAL_SERVER_ERROR, Message.UPDATE_FAILED);
+
+    if (result.orderStatus === OrderStatus.FINISH) {
+      const itemTarget = await this.orderItemModel
+        .find({ orderId: result._id })
+        .exec();
+      await this.rankProduct(itemTarget);
+    }
     return result;
+  }
+
+  private async rankProduct(itemTarget: OrderItem[]): Promise<void> {
+    const promiseAll = await itemTarget.map(async (ele) => {
+      await this.productService.productStatisEditor({
+        _id: ele.productId,
+        targetKey: "productRank",
+        modifier: 1,
+      });
+    });
+
+    Promise.all(promiseAll);
   }
 
   /* ================ ADMIN =========================== */
