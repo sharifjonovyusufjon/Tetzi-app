@@ -29,7 +29,8 @@ journalController.getJournal = async (req: ExtendedRequest, res: Response) => {
     res.json({ product: result });
   } catch (err) {
     console.log("Error, getJournal:", err);
-    res.send(err);
+    if (err instanceof Errors) res.status(err.code).json(err);
+    else res.status(Errors.standart.code).json(Errors.standart);
   }
 };
 
@@ -55,7 +56,8 @@ journalController.getJournals = async (req: ExtendedRequest, res: Response) => {
     res.json(result);
   } catch (err) {
     console.log("Error, getJournals:", err);
-    res.send(err);
+    if (err instanceof Errors) res.status(err.code).json(err);
+    else res.status(Errors.standart.code).json(Errors.standart);
   }
 };
 
@@ -74,7 +76,8 @@ journalController.createJournal = async (req: AdminRequest, res: Response) => {
     res.json({ journal: result });
   } catch (err) {
     console.log("Error, createJournal:", err);
-    res.send(err);
+    if (err instanceof Errors) res.status(err.code).json(err);
+    else res.status(Errors.standart.code).json(Errors.standart);
   }
 };
 
@@ -88,7 +91,8 @@ journalController.updateJournal = async (req: Request, res: Response) => {
     res.json({ journal: result });
   } catch (err) {
     console.log("Error, updateJournal:", err);
-    res.send(err);
+    if (err instanceof Errors) res.status(err.code).json(err);
+    else res.status(Errors.standart.code).json(Errors.standart);
   }
 };
 
@@ -99,7 +103,8 @@ journalController.getAllJournal = async (req: Request, res: Response) => {
     res.json({ journal: result });
   } catch (err) {
     console.log("Error, getAllJournal:", err);
-    res.send(err);
+    if (err instanceof Errors) res.status(err.code).json(err);
+    else res.status(Errors.standart.code).json(Errors.standart);
   }
 };
 

@@ -4,6 +4,7 @@ import CommentService from "../models/Comment.service";
 import { ExtendedRequest } from "../libs/types/member";
 import { CommentInput } from "../libs/types/comment";
 import { shapeIntoMongooseObjectId } from "../libs/config";
+import Errors from "../libs/Errors";
 
 const commentController: T = {};
 const commentService = new CommentService();
@@ -21,7 +22,8 @@ commentController.createComment = async (
     res.json({ comment: result });
   } catch (err) {
     console.log("Error, createComment:", err);
-    res.send(err);
+    if (err instanceof Errors) res.status(err.code).json(err);
+    else res.status(Errors.standart.code).json(Errors.standart);
   }
 };
 
@@ -34,7 +36,8 @@ commentController.getAllComment = async (req: Request, res: Response) => {
     res.json({ comment: result });
   } catch (err) {
     console.log("Error, getAllComment:", err);
-    res.send(err);
+    if (err instanceof Errors) res.status(err.code).json(err);
+    else res.status(Errors.standart.code).json(Errors.standart);
   }
 };
 
@@ -46,7 +49,8 @@ commentController.removeComment = async (req: Request, res: Response) => {
     res.json({ comment: result });
   } catch (err) {
     console.log("Error, removeComment:", err);
-    res.send(err);
+    if (err instanceof Errors) res.status(err.code).json(err);
+    else res.status(Errors.standart.code).json(Errors.standart);
   }
 };
 

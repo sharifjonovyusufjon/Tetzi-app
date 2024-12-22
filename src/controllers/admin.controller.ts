@@ -15,6 +15,8 @@ adminController.goHome = (req: Request, res: Response) => {
     res.send("goHome");
   } catch (err) {
     console.log("Error, goHome:", err);
+    if (err instanceof Errors) res.status(err.code).json(err);
+    else res.status(Errors.standart.code).json(Errors.standart);
   }
 };
 
@@ -24,6 +26,8 @@ adminController.goSignup = (req: Request, res: Response) => {
     res.send("goSignup");
   } catch (err) {
     console.log("Error, goSignup:", err);
+    if (err instanceof Errors) res.status(err.code).json(err);
+    else res.status(Errors.standart.code).json(Errors.standart);
   }
 };
 
@@ -33,6 +37,8 @@ adminController.goLogin = (req: Request, res: Response) => {
     res.send("goLogin");
   } catch (err) {
     console.log("Error, goLogin:", err);
+    if (err instanceof Errors) res.status(err.code).json(err);
+    else res.status(Errors.standart.code).json(Errors.standart);
   }
 };
 
@@ -50,7 +56,8 @@ adminController.processSignup = async (req: AdminRequest, res: Response) => {
     });
   } catch (err) {
     console.log("Error, processSignup:", err);
-    res.send(err);
+    if (err instanceof Errors) res.status(err.code).json(err);
+    else res.status(Errors.standart.code).json(Errors.standart);
   }
 };
 
@@ -65,7 +72,8 @@ adminController.processLogin = async (req: AdminRequest, res: Response) => {
     });
   } catch (err) {
     console.log("Error, processLogin:", err);
-    res.send(err);
+    if (err instanceof Errors) res.status(err.code).json(err);
+    else res.status(Errors.standart.code).json(Errors.standart);
   }
 };
 
@@ -77,7 +85,8 @@ adminController.processLogout = async (req: AdminRequest, res: Response) => {
     });
   } catch (err) {
     console.log("Error, processLogout:", err);
-    res.send(err);
+    if (err instanceof Errors) res.status(err.code).json(err);
+    else res.status(Errors.standart.code).json(Errors.standart);
   }
 };
 
@@ -89,7 +98,8 @@ adminController.checkAdmin = async (req: AdminRequest, res: Response) => {
     } else res.send(Message.NOT_AUNTiCANTED);
   } catch (err) {
     console.log("Error, checkAdmin:", err);
-    res.send(err);
+    if (err instanceof Errors) res.status(err.code).json(err);
+    else res.status(Errors.standart.code).json(Errors.standart);
   }
 };
 
@@ -105,7 +115,8 @@ adminController.verifyAdmin = async (
     } else res.send(Message.NOT_AUNTiCANTED);
   } catch (err) {
     console.log("Error, verifyAdmin:", err);
-    res.send(err);
+    if (err instanceof Errors) res.status(err.code).json(err);
+    else res.status(Errors.standart.code).json(Errors.standart);
   }
 };
 
@@ -118,7 +129,8 @@ adminController.getAllMember = async (req: Request, res: Response) => {
     res.json({ members: result });
   } catch (err) {
     console.log("Error, getAllMember:", err);
-    res.send(err);
+    if (err instanceof Errors) res.status(err.code).json(err);
+    else res.status(Errors.standart.code).json(Errors.standart);
   }
 };
 
@@ -129,7 +141,8 @@ adminController.updateMember = async (req: Request, res: Response) => {
     res.json({ member: result });
   } catch (err) {
     console.log("Error, updateMember:", err);
-    res.send(err);
+    if (err instanceof Errors) res.status(err.code).json(err);
+    else res.status(Errors.standart.code).json(Errors.standart);
   }
 };
 

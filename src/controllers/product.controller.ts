@@ -11,7 +11,6 @@ import {
 import ProductService from "../models/Product.service";
 import { shapeIntoMongooseObjectId } from "../libs/config";
 
-
 const productController: T = {};
 const productService = new ProductService();
 
@@ -31,7 +30,8 @@ productController.getProduct = async (req: ExtendedRequest, res: Response) => {
     res.json({ product: result });
   } catch (err) {
     console.log("Error, getProduct:", err);
-    res.send(err);
+    if (err instanceof Errors) res.status(err.code).json(err);
+    else res.status(Errors.standart.code).json(Errors.standart);
   }
 };
 
@@ -57,7 +57,8 @@ productController.getProducts = async (req: ExtendedRequest, res: Response) => {
     res.json(result);
   } catch (err) {
     console.log("Error, getProducts:", err);
-    res.send(err);
+    if (err instanceof Errors) res.status(err.code).json(err);
+    else res.status(Errors.standart.code).json(Errors.standart);
   }
 };
 
@@ -84,7 +85,8 @@ productController.getBestSeller = async (
     res.json(result);
   } catch (err) {
     console.log("Error, getBestSeller:", err);
-    res.send(err);
+    if (err instanceof Errors) res.status(err.code).json(err);
+    else res.status(Errors.standart.code).json(Errors.standart);
   }
 };
 
@@ -105,7 +107,8 @@ productController.createProduct = async (req: AdminRequest, res: Response) => {
     res.json({ product: result });
   } catch (err) {
     console.log("Error, createProduct:", err);
-    res.send(err);
+    if (err instanceof Errors) res.status(err.code).json(err);
+    else res.status(Errors.standart.code).json(Errors.standart);
   }
 };
 
@@ -118,7 +121,8 @@ productController.updateProduct = async (req: Request, res: Response) => {
     res.json({ product: result });
   } catch (err) {
     console.log("Error, updateProduct:", err);
-    res.send(err);
+    if (err instanceof Errors) res.status(err.code).json(err);
+    else res.status(Errors.standart.code).json(Errors.standart);
   }
 };
 
@@ -129,7 +133,8 @@ productController.getAllProduct = async (req: Request, res: Response) => {
     res.json({ product: result });
   } catch (err) {
     console.log("Error, getAllProduct:", err);
-    res.send(err);
+    if (err instanceof Errors) res.status(err.code).json(err);
+    else res.status(Errors.standart.code).json(Errors.standart);
   }
 };
 export default productController;

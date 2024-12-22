@@ -31,7 +31,8 @@ memberController.signup = async (req: Request, res: Response) => {
     res.json({ member: result, accessToken: token });
   } catch (err) {
     console.log("Error, signup:", err);
-    res.send(err);
+    if (err instanceof Errors) res.status(err.code).json(err);
+    else res.status(Errors.standart.code).json(Errors.standart);
   }
 };
 
@@ -50,7 +51,8 @@ memberController.login = async (req: Request, res: Response) => {
     res.json({ member: result, accessToken: token });
   } catch (err) {
     console.log("Error, login:", err);
-    res.send(err);
+    if (err instanceof Errors) res.status(err.code).json(err);
+    else res.status(Errors.standart.code).json(Errors.standart);
   }
 };
 
@@ -61,7 +63,8 @@ memberController.logout = (req: ExtendedRequest, res: Response) => {
     res.json({ logout: true });
   } catch (err) {
     console.log("Error, logout:", err);
-    res.send(err);
+    if (err instanceof Errors) res.status(err.code).json(err);
+    else res.status(Errors.standart.code).json(Errors.standart);
   }
 };
 
@@ -82,7 +85,8 @@ memberController.verifyAuth = async (
     next();
   } catch (err) {
     console.log("Error, verifyAuth:", err);
-    res.send(err);
+    if (err instanceof Errors) res.status(err.code).json(err);
+    else res.status(Errors.standart.code).json(Errors.standart);
   }
 };
 
@@ -100,7 +104,8 @@ memberController.retriewAuth = async (
     next();
   } catch (err) {
     console.log("Error, retriewAuth:", err);
-    res.send(err);
+    if (err instanceof Errors) res.status(err.code).json(err);
+    else res.status(Errors.standart.code).json(Errors.standart);
   }
 };
 
@@ -111,7 +116,8 @@ memberController.getAdmin = async (req: Request, res: Response) => {
     res.json({ member: result });
   } catch (err) {
     console.log("Error, getAdmin:", err);
-    res.send(err);
+    if (err instanceof Errors) res.status(err.code).json(err);
+    else res.status(Errors.standart.code).json(Errors.standart);
   }
 };
 
@@ -122,7 +128,8 @@ memberController.memberDetail = async (req: ExtendedRequest, res: Response) => {
     res.json({ member: result });
   } catch (err) {
     console.log("Error, memberDetail:", err);
-    res.send(err);
+    if (err instanceof Errors) res.status(err.code).json(err);
+    else res.status(Errors.standart.code).json(Errors.standart);
   }
 };
 
@@ -140,7 +147,8 @@ memberController.memberUpdate = async (req: ExtendedRequest, res: Response) => {
     res.json({ member: result });
   } catch (err) {
     console.log("Error, memberDetail:", err);
-    res.send(err);
+    if (err instanceof Errors) res.status(err.code).json(err);
+    else res.status(Errors.standart.code).json(Errors.standart);
   }
 };
 
