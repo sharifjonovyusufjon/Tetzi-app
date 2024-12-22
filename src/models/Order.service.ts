@@ -1,10 +1,16 @@
 import { T } from "../libs/types/common";
 import { OrderStatus } from "../libs/enums/order.enum";
 import Errors, { HttpCode, Message } from "../libs/Errors";
-import { Order, OrderInQuiry, OrderItemInput } from "../libs/types/order";
+import {
+  Order,
+  OrderInQuiry,
+  OrderItemInput,
+  UpdateOrder,
+} from "../libs/types/order";
 import OrderModel from "../schema/Order.model";
 import OrderItemModel from "../schema/OrderItem.model";
 import { ObjectId } from "mongoose";
+import { shapeIntoMongooseObjectId } from "../libs/config";
 
 class OrderService {
   private readonly orderModel;
@@ -93,6 +99,25 @@ class OrderService {
     if (!result.length)
       throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
     return result[0];
+  }
+
+  public async updateOrder(
+    memberId: ObjectId,
+    input: UpdateOrder
+  ): Promise<Order> {
+    const { orderId, orderStatus } = input;
+
+    const _id = shapeIntoMongooseObjectId(orderId);
+    const result = await this.orderModel
+      .findOneAndUpdate(
+        { _id: _id, memberId: memberId },
+        { orderStatus: orderStatus },
+        { new: true }
+      )
+      .exec();
+    if (!result)
+      throw new Errors(HttpCode.INTERNAL_SERVER_ERROR, Message.UPDATE_FAILED);
+    return result;
   }
 }
 
