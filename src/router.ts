@@ -3,6 +3,7 @@ import memberController from "./controllers/member.controller";
 import productController from "./controllers/product.controller";
 import journalController from "./controllers/journal.controller";
 import makeUploader from "./libs/utils/uploader";
+import commentController from "./controllers/comment.controller";
 const router = Router();
 
 router.post("/member/signup", memberController.signup);
@@ -64,6 +65,16 @@ router.get(
   "/journal/:id",
   memberController.retriewAuth,
   journalController.getJournal
+);
+
+/* ORDER */
+
+/* COMMENT */
+
+router.post(
+  "/comment/create",
+  memberController.verifyAuth,
+  commentController.createComment
 );
 
 export default router;

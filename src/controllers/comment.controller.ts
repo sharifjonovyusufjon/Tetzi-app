@@ -1,6 +1,28 @@
 import { Request, Response } from "express";
 import { T } from "../libs/types/common";
 import CommentService from "../models/Comment.service";
+import { ExtendedRequest } from "../libs/types/member";
+import { CommentInput } from "../libs/types/comment";
+import { shapeIntoMongooseObjectId } from "../libs/config";
 
 const commentController: T = {};
 const commentService = new CommentService();
+
+commentController.createComment = async (
+  req: ExtendedRequest,
+  res: Response
+) => {
+  try {
+    console.log("createComment");
+    const input: CommentInput = req.body;
+    input.memberId = req.member._id;
+    input.commentRefId = shapeIntoMongooseObjectId(input.commentRefId);
+    const result = await commentService.createComment(input);
+    res.json({ comment: result });
+  } catch (err) {
+    console.log("Error, createComment:", err);
+    res.send(err);
+  }
+};
+
+export default commentController;
