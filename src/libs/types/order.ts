@@ -14,6 +14,11 @@ export interface Order {
   orderTotal: number;
   orderDelivery: number;
   memberId: ObjectId;
+
+  /* from aggregate */
+
+  orderItemData?: [];
+  productData?: [];
 }
 
 export interface OrderItemInput {
@@ -28,4 +33,10 @@ export interface OrderItem {
   itemPrice: number;
   orderId: ObjectId;
   productId: ObjectId;
+}
+
+export interface OrderInQuiry {
+  page: number;
+  limit: number;
+  orderStatus: OrderStatus;
 }

@@ -1,6 +1,7 @@
+import { T } from "../libs/types/common";
 import { OrderStatus } from "../libs/enums/order.enum";
 import Errors, { HttpCode, Message } from "../libs/Errors";
-import { Order, OrderItemInput } from "../libs/types/order";
+import { Order, OrderInQuiry, OrderItemInput } from "../libs/types/order";
 import OrderModel from "../schema/Order.model";
 import OrderItemModel from "../schema/OrderItem.model";
 import { ObjectId } from "mongoose";
@@ -53,6 +54,45 @@ class OrderService {
 
       Promise.all(promiseAll);
     });
+  }
+
+  public async getMyOrders(
+    memberId: ObjectId,
+    input: OrderInQuiry
+  ): Promise<Order> {
+    const { page, limit, orderStatus } = input;
+
+    const match: T = { memberId: memberId };
+    const sort: T = { updatedAt: -1 };
+
+    const result = await this.orderModel
+      .aggregate([
+        { $match: match },
+        { $sort: sort },
+        { $skip: (input.page - 1) * input.limit },
+        { $limit: input.limit },
+        {
+          $lookup: {
+            from: "orderItems",
+            localField: "_id",
+            foreignField: "orderId",
+            as: "orderItemData",
+          },
+        },
+        {
+          $lookup: {
+            from: "products",
+            localField: "orderItemData.productId",
+            foreignField: "_id",
+            as: "productData",
+          },
+        },
+      ])
+      .exec();
+
+    if (!result.length)
+      throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
+    return result[0];
   }
 }
 
