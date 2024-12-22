@@ -21,6 +21,9 @@ export interface Journal {
   journalViews: number;
   createdAt?: Date;
   updatedAt?: Date;
+
+  /* from aggregate */
+  journalData?: [Comment];
 }
 
 export interface UpdateJournalInput {

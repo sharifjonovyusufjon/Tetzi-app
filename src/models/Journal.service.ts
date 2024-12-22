@@ -26,12 +26,22 @@ class JournalService {
     memberId: ObjectId | null,
     journalId: ObjectId
   ): Promise<Journal> {
-    const journalTarget = await this.journalModel.findOne({
-      _id: journalId,
-      journalStatus: JournalStatus.PROCESS,
-    });
-
-    if (!journalTarget)
+    const match: T = { _id: journalId, journalStatus: JournalStatus.PROCESS };
+    const journalTarget = await this.journalModel
+      .aggregate([
+        { $match: match },
+        {
+          $lookup: {
+            from: "comments",
+            localField: "_id",
+            foreignField: "commentRefId",
+            as: "journalData",
+          },
+        },
+      ])
+      .exec();
+    console.log("journalT", journalTarget);
+    if (!journalTarget.length)
       throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
 
     if (memberId) {
@@ -48,11 +58,11 @@ class JournalService {
           modifier: 1,
         });
 
-        journalTarget.journalViews++;
+        journalTarget[0].journalViews++;
       }
     }
 
-    return journalTarget;
+    return journalTarget[0];
   }
 
   public async journalStatisEditor(input: StatatisEditor): Promise<void> {

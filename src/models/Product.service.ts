@@ -27,13 +27,22 @@ class ProductService {
     memberId: ObjectId | null,
     productId: ObjectId
   ): Promise<Product> {
-    console.log(productId);
-    const productTarget = await this.productModel.findOne({
-      _id: productId,
-      productStatus: ProductStatus.PROCESS,
-    });
+    const match: T = { _id: productId, productStatus: ProductStatus.PROCESS };
+    const productTarget = await this.productModel
+      .aggregate([
+        { $match: match },
+        {
+          $lookup: {
+            from: "comments",
+            localField: "_id",
+            foreignField: "commentRefId",
+            as: "productData",
+          },
+        },
+      ])
+      .exec();
 
-    if (!productTarget)
+    if (!productTarget.length)
       throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
 
     if (memberId) {
@@ -50,11 +59,11 @@ class ProductService {
           modifier: 1,
         });
 
-        productTarget.productViews++;
+        productTarget[0].productViews++;
       }
     }
 
-    return productTarget;
+    return productTarget[0];
   }
 
   public async productStatisEditor(input: StatatisEditor): Promise<void> {
