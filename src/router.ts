@@ -4,6 +4,7 @@ import productController from "./controllers/product.controller";
 import journalController from "./controllers/journal.controller";
 import makeUploader from "./libs/utils/uploader";
 import commentController from "./controllers/comment.controller";
+import orderController from "./controllers/order.controller";
 const router = Router();
 
 router.post("/member/signup", memberController.signup);
@@ -68,6 +69,12 @@ router.get(
 );
 
 /* ORDER */
+
+router.post(
+  "/order/create",
+  memberController.verifyAuth,
+  orderController.createOrder
+);
 
 /* COMMENT */
 

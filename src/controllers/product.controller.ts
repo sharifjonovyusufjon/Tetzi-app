@@ -10,7 +10,7 @@ import {
 } from "../libs/types/product";
 import ProductService from "../models/Product.service";
 import { shapeIntoMongooseObjectId } from "../libs/config";
-import { ObjectId } from "mongoose";
+
 
 const productController: T = {};
 const productService = new ProductService();
