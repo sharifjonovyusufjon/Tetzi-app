@@ -25,4 +25,29 @@ commentController.createComment = async (
   }
 };
 
+/* ====================== ADMIN ======================= */
+
+commentController.getAllComment = async (req: Request, res: Response) => {
+  try {
+    console.log("getAllComment");
+    const result = await commentService.getAllComment();
+    res.json({ comment: result });
+  } catch (err) {
+    console.log("Error, getAllComment:", err);
+    res.send(err);
+  }
+};
+
+commentController.removeComment = async (req: Request, res: Response) => {
+  try {
+    console.log("removeComment");
+    const commentId = shapeIntoMongooseObjectId(req.params.id);
+    const result = await commentService.removeComment(commentId);
+    res.json({ comment: result });
+  } catch (err) {
+    console.log("Error, removeComment:", err);
+    res.send(err);
+  }
+};
+
 export default commentController;

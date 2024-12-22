@@ -42,6 +42,19 @@ class CommentService {
       throw new Errors(HttpCode.BAD_REQUEST, Message.CREATE_FAILED);
     }
   }
+
+  /* ====================== ADMIN ======================= */
+  public async getAllComment(): Promise<Comment[]> {
+    const result = await this.commentModel.find().exec();
+    return result.length ? result : [];
+  }
+
+  public async removeComment(commentId: ObjectId): Promise<Comment> {
+    const result = await this.commentModel.findByIdAndRemove(commentId).exec();
+    if (!result)
+      throw new Errors(HttpCode.INTERNAL_SERVER_ERROR, Message.UPDATE_FAILED);
+    return result;
+  }
 }
 
 export default CommentService;

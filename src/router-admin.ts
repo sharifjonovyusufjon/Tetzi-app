@@ -3,6 +3,7 @@ import adminController from "./controllers/admin.controller";
 import makeUploader from "./libs/utils/uploader";
 import productController from "./controllers/product.controller";
 import journalController from "./controllers/journal.controller";
+import commentController from "./controllers/comment.controller";
 const routerAdmin = Router();
 
 /* ADMIN */
@@ -76,6 +77,18 @@ routerAdmin.get(
   "/journal/all",
   adminController.verifyAdmin,
   journalController.getAllJournal
+);
+
+/* ADMIN ORDER */
+
+/* ADMIN COMMENT */
+
+routerAdmin.get("/comment/all", adminController.verifyAdmin, commentController.getAllComment)
+
+routerAdmin.get(
+  "/comment/remove/:id",
+  adminController.verifyAdmin,
+  commentController.removeComment
 );
 
 export default routerAdmin;
