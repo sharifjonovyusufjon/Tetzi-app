@@ -8,6 +8,7 @@ import cookieParser from "cookie-parser";
 import session from "express-session";
 import ConnectMongoDB from "connect-mongodb-session";
 import { T } from "./libs/types/common";
+import cors from "cors";
 
 const MongoDBStore = ConnectMongoDB(session);
 const store = new MongoDBStore({
@@ -22,6 +23,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());
+app.use(cors({ credentials: true, origin: this }));
 app.use(morgan(MORGAN_FORMAT));
 app.use("/uploads", express.static("./uploads"));
 
