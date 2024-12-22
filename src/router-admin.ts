@@ -4,6 +4,7 @@ import makeUploader from "./libs/utils/uploader";
 import productController from "./controllers/product.controller";
 import journalController from "./controllers/journal.controller";
 import commentController from "./controllers/comment.controller";
+import orderController from "./controllers/order.controller";
 const routerAdmin = Router();
 
 /* ADMIN */
@@ -81,9 +82,19 @@ routerAdmin.get(
 
 /* ADMIN ORDER */
 
+routerAdmin.get(
+  "/order/all",
+  adminController.verifyAdmin,
+  orderController.getOrders
+);
+
 /* ADMIN COMMENT */
 
-routerAdmin.get("/comment/all", adminController.verifyAdmin, commentController.getAllComment)
+routerAdmin.get(
+  "/comment/all",
+  adminController.verifyAdmin,
+  commentController.getAllComment
+);
 
 routerAdmin.get(
   "/comment/remove/:id",

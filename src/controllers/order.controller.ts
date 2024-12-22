@@ -56,4 +56,17 @@ orderController.updateOrder = async (req: ExtendedRequest, res: Response) => {
   }
 };
 
+/* ==================== ADMIN ==================== */
+
+orderController.getOrders = async (req: Request, res: Response) => {
+  try {
+    console.log("getOrders");
+    const result = await orderService.getOrders();
+    res.json({ order: result });
+  } catch (err) {
+    console.log("Error, getOrders:", err);
+    res.send(err);
+  }
+};
+
 export default orderController;

@@ -119,6 +119,13 @@ class OrderService {
       throw new Errors(HttpCode.INTERNAL_SERVER_ERROR, Message.UPDATE_FAILED);
     return result;
   }
+
+  /* ================ ADMIN =========================== */
+
+  public async getOrders(): Promise<Order[]> {
+    const result = await this.orderModel.find().exec();
+    return result.length ? result : [];
+  }
 }
 
 export default OrderService;
