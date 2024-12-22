@@ -4,8 +4,8 @@ import { CommentGroup } from "../enums/comment.enum";
 export interface CommentInput {
   commentGroup: CommentGroup;
   commentContext: string;
-  memberId?: ObjectId;
-  commentRefId?: ObjectId;
+  memberId: ObjectId;
+  commentRefId: ObjectId;
 }
 
 export interface Comment {

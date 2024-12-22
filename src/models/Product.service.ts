@@ -57,10 +57,14 @@ class ProductService {
     return productTarget;
   }
 
-  private async productStatisEditor(input: StatatisEditor): Promise<void> {
+  public async productStatisEditor(input: StatatisEditor): Promise<void> {
     const { _id, targetKey, modifier } = input;
     return await this.productModel
-      .findByIdAndUpdate(_id, { [targetKey]: modifier }, { new: true })
+      .findByIdAndUpdate(
+        _id,
+        { $inc: { [targetKey]: modifier } },
+        { new: true }
+      )
       .exec();
   }
 

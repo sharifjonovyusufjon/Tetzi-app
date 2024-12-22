@@ -55,10 +55,14 @@ class JournalService {
     return journalTarget;
   }
 
-  private async journalStatisEditor(input: StatatisEditor): Promise<void> {
+  public async journalStatisEditor(input: StatatisEditor): Promise<void> {
     const { _id, targetKey, modifier } = input;
     return await this.journalModel
-      .findByIdAndUpdate(_id, { [targetKey]: modifier }, { new: true })
+      .findByIdAndUpdate(
+        _id,
+        { $inc: { [targetKey]: modifier } },
+        { new: true }
+      )
       .exec();
   }
 
