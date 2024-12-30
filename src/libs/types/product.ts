@@ -58,25 +58,17 @@ export interface UpdateProductInput {
   productSize?: ProductSize;
 }
 
-interface PriceRange {
-  start?: number;
-  end?: number;
-}
-
-interface AlSearch {
-  productCategory?: ProductCategory;
-  productColor?: ProductColor;
-  productBrand?: ProductBrand;
-  productPrice?: PriceRange;
-  text?: string;
-}
-
 export interface ProductInQuery {
   page: number;
   sort?: string;
   direction?: Direction;
   limit: number;
-  search: AlSearch;
+  productCategory?: ProductCategory;
+  productColor?: ProductColor;
+  productBrand?: ProductBrand;
+  start?: number;
+  end?: number;
+  text?: string;
 }
 
 export interface ProductBestSellerInQuery {

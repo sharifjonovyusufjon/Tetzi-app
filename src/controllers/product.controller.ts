@@ -10,6 +10,11 @@ import {
 } from "../libs/types/product";
 import ProductService from "../models/Product.service";
 import { shapeIntoMongooseObjectId } from "../libs/config";
+import {
+  ProductBrand,
+  ProductCategory,
+  ProductColor,
+} from "../libs/enums/product.enum";
 
 const productController: T = {};
 const productService = new ProductService();
@@ -38,14 +43,33 @@ productController.getProduct = async (req: ExtendedRequest, res: Response) => {
 productController.getProducts = async (req: ExtendedRequest, res: Response) => {
   try {
     console.log("getProducts");
-    const { page, sort, direction, limit, search } = req.query;
+    const {
+      page,
+      sort,
+      direction,
+      limit,
+      productCategory,
+      productColor,
+      productBrand,
+      start,
+      end,
+      text,
+    } = req.query;
+
     const input: ProductInQuery = {
       page: Number(page),
       sort: String(sort),
       direction: Number(direction),
       limit: Number(limit),
-      search: {},
     };
+
+    if (productCategory)
+      input.productCategory = productCategory as ProductCategory;
+    if (productColor) input.productColor = productColor as ProductColor;
+    if (productBrand) input.productBrand = productBrand as ProductBrand;
+    if (start) input.start = Number(start);
+    if (end) input.end = Number(end);
+    if (text) input.text = String(text);
 
     let memberId;
     if (req.member === undefined) {

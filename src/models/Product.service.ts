@@ -86,8 +86,14 @@ class ProductService {
       [input?.sort ?? "createdAt"]: input?.direction ?? Direction.DESC,
     };
 
-    this.matchQuery(match, input);
-
+    if (input?.productCategory) match.productCategory = input.productCategory;
+    if (input?.productColor) match.productColor = input.productColor;
+    if (input?.productBrand) match.productBrand = input.productBrand;
+    if (input?.start && input?.end)
+      match.productPrice = { $gte: input.start, $lte: input.end };
+    if (input?.text)
+      match.productName = { $regex: new RegExp(input.text, "i") };
+    console.log("ma", match);
     const result = await this.productModel
       .aggregate([
         { $match: match },
@@ -120,18 +126,6 @@ class ProductService {
       .exec();
 
     return result.length ? result : [];
-  }
-
-  private matchQuery(match: T, input: ProductInQuery): void {
-    const { productBrand, productCategory, productColor, productPrice, text } =
-      input.search;
-
-    if (productCategory) match.productCategory = productCategory;
-    if (productColor) match.productColor = productColor;
-    if (productBrand) match.productBrand = productBrand;
-    if (productPrice)
-      match.productPrice = { $gte: productPrice.start, $lte: productPrice.end };
-    if (text) match.productName = { $regex: new RegExp(text, "i") };
   }
 
   /* ------- ADMIN ------ */
