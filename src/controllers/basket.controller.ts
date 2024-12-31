@@ -39,4 +39,15 @@ basketController.updateCard = async (req: ExtendedRequest, res: Response) => {
   }
 };
 
+basketController.allCard = async (req: ExtendedRequest, res: Response) => {
+  try {
+    const result = await basketService.allCard(req.member._id);
+    res.json({ basket: result });
+  } catch (err) {
+    console.log("Error, allCard:", err);
+    if (err instanceof Errors) res.status(err.code).json(err);
+    else res.status(Errors.standart.code).json(Errors.standart);
+  }
+};
+
 export default basketController;

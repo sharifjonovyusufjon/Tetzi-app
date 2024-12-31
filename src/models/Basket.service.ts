@@ -88,6 +88,11 @@ class BasketService {
         .exec();
     }
   }
+
+  public async allCard(memberId: Object): Promise<Basket[]> {
+    const card = await this.basketModel.findOne({ memberId: memberId }).exec();
+    return card ? card : [];
+  }
 }
 
 export default BasketService;

@@ -108,4 +108,10 @@ router.post(
   memberController.verifyAuth,
   basketController.updateCard
 );
+
+router.get(
+  "/basket/all",
+  memberController.verifyAuth,
+  basketController.allCard
+);
 export default router;
