@@ -7,6 +7,7 @@ import {
   ProductSize,
   ProductStatus,
 } from "../enums/product.enum";
+import { Member } from "./member";
 
 export interface ProductInput {
   productStatus?: ProductStatus;
@@ -39,6 +40,7 @@ export interface Product {
   productRank: number;
   createdAt?: Date;
   updatedAt?: Date;
+  memberData?: Member;
 
   /* from aggregate */
   productData?: [Comment];

@@ -39,6 +39,15 @@ class ProductService {
             as: "productData",
           },
         },
+        {
+          $lookup: {
+            from: "members",
+            localField: "productData.memberId",
+            foreignField: "_id",
+            as: "memberData",
+          },
+        },
+        { $unwind: "$memberData" },
       ])
       .exec();
 
