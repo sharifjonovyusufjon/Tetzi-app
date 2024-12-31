@@ -1,4 +1,5 @@
 import { ObjectId } from "mongoose";
+import { Product } from "./product";
 
 export interface BasketInput {
   basketTotal?: number;
@@ -15,6 +16,7 @@ export interface Basket {
   productPrice: number;
   memberId: ObjectId;
   productId: ObjectId;
+  productData: Product;
 }
 
 export interface UpdateBasketInput {

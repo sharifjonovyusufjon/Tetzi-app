@@ -4,6 +4,7 @@ import { Basket, BasketInput, UpdateBasketInput } from "../libs/types/basket";
 import BasketModel from "../schema/Basket.model";
 import MemberService from "./Member.service";
 import ProductService from "./Product.service";
+import { Direction } from "../libs/enums/product.enum";
 
 class BasketService {
   private readonly basketModel;
@@ -90,7 +91,21 @@ class BasketService {
   }
 
   public async allCard(memberId: Object): Promise<Basket[]> {
-    const card = await this.basketModel.findOne({ memberId: memberId }).exec();
+    const card = await this.basketModel
+      .aggregate([
+        { $match: { memberId: memberId } },
+        { $sort: { updatedAt: Direction.ASC } },
+        {
+          $lookup: {
+            from: "products",
+            localField: "productId",
+            foreignField: "_id",
+            as: "productData",
+          },
+        },
+        { $unwind: "$productData" },
+      ])
+      .exec();
     return card ? card : [];
   }
 }
