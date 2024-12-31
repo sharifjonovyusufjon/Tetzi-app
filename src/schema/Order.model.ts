@@ -6,7 +6,7 @@ const orderSchema = new Schema(
     orderStatus: {
       type: String,
       enum: OrderStatus,
-      default: OrderStatus.BASKET,
+      default: OrderStatus.PAUSE,
     },
 
     orderTotal: {

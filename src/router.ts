@@ -5,6 +5,7 @@ import journalController from "./controllers/journal.controller";
 import makeUploader from "./libs/utils/uploader";
 import commentController from "./controllers/comment.controller";
 import orderController from "./controllers/order.controller";
+import basketController from "./controllers/basket.controller";
 const router = Router();
 
 router.post("/member/signup", memberController.signup);
@@ -96,4 +97,15 @@ router.post(
   commentController.createComment
 );
 
+router.post(
+  "/basket/create",
+  memberController.verifyAuth,
+  basketController.createCard
+);
+
+router.post(
+  "/basket/update",
+  memberController.verifyAuth,
+  basketController.updateCard
+);
 export default router;
