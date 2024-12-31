@@ -94,7 +94,7 @@ class BasketService {
     const card = await this.basketModel
       .aggregate([
         { $match: { memberId: memberId } },
-        { $sort: { updatedAt: Direction.ASC } },
+        { $sort: { updatedAt: Direction.DESC } },
         {
           $lookup: {
             from: "products",
