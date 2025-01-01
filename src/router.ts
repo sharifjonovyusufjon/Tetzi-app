@@ -71,7 +71,7 @@ router.get(
 
 /* ORDER */
 
-router.post(
+router.get(
   "/order/create",
   memberController.verifyAuth,
   orderController.createOrder

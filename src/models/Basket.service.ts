@@ -106,7 +106,12 @@ class BasketService {
         { $unwind: "$productData" },
       ])
       .exec();
+
     return card ? card : [];
+  }
+
+  public async removeBasket(memberId: Object): Promise<void> {
+    await this.basketModel.findOneAndRemove({ memberId: memberId }).exec();
   }
 }
 

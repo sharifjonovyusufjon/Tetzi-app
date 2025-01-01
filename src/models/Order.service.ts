@@ -13,21 +13,37 @@ import OrderItemModel from "../schema/OrderItem.model";
 import { ObjectId } from "mongoose";
 import { shapeIntoMongooseObjectId } from "../libs/config";
 import ProductService from "./Product.service";
+import BasketService from "./Basket.service";
+import { Basket } from "../libs/types/basket";
 
 class OrderService {
   private readonly orderModel;
   private readonly orderItemModel;
   private readonly productService;
+  private readonly basketService;
   constructor() {
     this.orderModel = OrderModel;
     this.orderItemModel = OrderItemModel;
     this.productService = new ProductService();
+    this.basketService = new BasketService();
   }
 
-  public async createOrder(
-    memberId: ObjectId,
-    input: OrderItemInput[]
-  ): Promise<Order> {
+  public async createOrder(memberId: ObjectId): Promise<Order> {
+    const basket = await this.basketService.allCard(memberId);
+    if (!basket.length)
+      throw new Errors(HttpCode.BAD_REQUEST, Message.NO_DATA_FOUND);
+
+    let input: OrderItemInput[] = [];
+    await Promise.all(
+      basket.map(async (ele: Basket) => {
+        return await input.push({
+          productId: ele.productId,
+          itemQuantity: ele.basketQuantity,
+          itemPrice: ele.productPrice,
+        });
+      })
+    );
+
     const amount = input.reduce((accumulater: number, item: OrderItemInput) => {
       return accumulater + item.itemPrice * item.itemQuantity;
     }, 0);
@@ -42,7 +58,7 @@ class OrderService {
       });
 
       await this.orderItem(result._id, input);
-
+      await this.basketService.removeBasket(memberId);
       return result;
     } catch (err) {
       throw new Errors(HttpCode.BAD_REQUEST, Message.CREATE_FAILED);
