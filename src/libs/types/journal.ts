@@ -35,13 +35,8 @@ export interface UpdateJournalInput {
   journalImage?: string;
 }
 
-export interface AllSearchJournal {
-  text?: string;
-  journalCategory?: JournalCategory;
-}
-
 export interface JournalInQuiry {
   page: number;
   limit: number;
-  search: AllSearchJournal;
+  search: string;
 }

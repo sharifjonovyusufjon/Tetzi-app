@@ -42,7 +42,7 @@ journalController.getJournals = async (req: ExtendedRequest, res: Response) => {
     const input: JournalInQuiry = {
       page: Number(page),
       limit: Number(limit),
-      search: {},
+      search: String(search),
     };
 
     let memberId;

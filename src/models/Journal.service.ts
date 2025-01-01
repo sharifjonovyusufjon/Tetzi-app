@@ -13,13 +13,16 @@ import { ObjectId } from "mongoose";
 import { ViewInput } from "../libs/types/view";
 import { ViewGroup } from "../libs/enums/view.num";
 import { StatatisEditor } from "../libs/config";
+import MemberService from "./Member.service";
 
 class JournalService {
   private readonly journalModel;
   private readonly viewService;
+  private readonly memberService;
   constructor() {
     this.journalModel = JournalModel;
     this.viewService = new ViewService();
+    this.memberService = new MemberService();
   }
 
   public async getJournal(
@@ -62,6 +65,15 @@ class JournalService {
       }
     }
 
+    const comment = journalTarget[0].journalData;
+    const data = await Promise.all(
+      comment.map(async (ele: any) => {
+        const memberData = await this.memberService.memberDetail(ele.memberId);
+        ele.memberData = memberData;
+        return ele;
+      })
+    );
+
     return journalTarget[0];
   }
 
@@ -81,13 +93,10 @@ class JournalService {
     input: JournalInQuiry
   ): Promise<Journal[]> {
     const { page, limit, search } = input;
-    const { text, journalCategory } = input.search;
 
     const match: T = { journalStatus: JournalStatus.PROCESS };
     const sort: T = { createdAt: -1 };
-
-    if (journalCategory) match.journalCategory = journalCategory;
-    if (text) match.journalTitle = { $regex: new RegExp(text, "i") };
+    if (search) match.journalTitle = { $regex: new RegExp(search, "i") };
 
     const result = await this.journalModel
       .aggregate([
