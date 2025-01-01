@@ -14,13 +14,17 @@ import ViewService from "./View.service";
 import { ViewInput } from "../libs/types/view";
 import { ViewGroup } from "../libs/enums/view.num";
 import { StatatisEditor } from "../libs/config";
+import MemberService from "./Member.service";
+import { Comment } from "../libs/types/comment";
 
 class ProductService {
   private readonly productModel;
   private readonly viewService;
+  private readonly memberService;
   constructor() {
     this.productModel = ProductModel;
     this.viewService = new ViewService();
+    this.memberService = new MemberService();
   }
 
   public async getProduct(
@@ -28,7 +32,7 @@ class ProductService {
     productId: ObjectId
   ): Promise<Product> {
     const match: T = { _id: productId, productStatus: ProductStatus.PROCESS };
-    const productTarget = await this.productModel
+    const productTarget: Product[] = await this.productModel
       .aggregate([
         { $match: match },
         {
@@ -39,15 +43,6 @@ class ProductService {
             as: "productData",
           },
         },
-        {
-          $lookup: {
-            from: "members",
-            localField: "productData.memberId",
-            foreignField: "_id",
-            as: "memberData",
-          },
-        },
-        { $unwind: "$memberData" },
       ])
       .exec();
 
@@ -71,6 +66,15 @@ class ProductService {
         productTarget[0].productViews++;
       }
     }
+
+    const comment = productTarget[0].productData;
+    const data = await Promise.all(
+      comment.map(async (ele: any) => {
+        const memberData = await this.memberService.memberDetail(ele.memberId);
+        ele.memberData = memberData;
+        return ele;
+      })
+    );
 
     return productTarget[0];
   }

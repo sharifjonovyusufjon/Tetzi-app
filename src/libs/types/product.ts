@@ -40,10 +40,9 @@ export interface Product {
   productRank: number;
   createdAt?: Date;
   updatedAt?: Date;
-  memberData?: Member;
 
   /* from aggregate */
-  productData?: [Comment];
+  productData: Comment[];
 }
 
 export interface UpdateProductInput {

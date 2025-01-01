@@ -10,8 +10,10 @@ export interface CommentInput {
 }
 
 export interface Comment {
+  _id: ObjectId;
   commentGroup: CommentGroup;
   commentContext: string;
   memberId: ObjectId;
   commentRefId: ObjectId;
+  memberData?: Member;
 }
