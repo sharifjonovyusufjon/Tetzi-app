@@ -111,7 +111,7 @@ class BasketService {
   }
 
   public async removeBasket(memberId: Object): Promise<void> {
-    await this.basketModel.findOneAndRemove({ memberId: memberId }).exec();
+    await this.basketModel.deleteMany({ memberId: memberId }).exec();
   }
 }
 

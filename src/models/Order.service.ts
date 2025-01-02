@@ -32,17 +32,21 @@ class OrderService {
     const basket = await this.basketService.allCard(memberId);
     if (!basket.length)
       throw new Errors(HttpCode.BAD_REQUEST, Message.NO_DATA_FOUND);
-
     let input: OrderItemInput[] = [];
+    console.log("basket", basket);
     await Promise.all(
-      basket.map(async (ele: Basket) => {
-        return await input.push({
+      basket.map((ele: Basket) => {
+        const orderItem = {
           productId: ele.productId,
           itemQuantity: ele.basketQuantity,
           itemPrice: ele.productPrice,
-        });
+        };
+
+        input.push(orderItem);
       })
     );
+
+    console.log("input", input);
 
     const amount = input.reduce((accumulater: number, item: OrderItemInput) => {
       return accumulater + item.itemPrice * item.itemQuantity;
