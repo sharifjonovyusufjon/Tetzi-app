@@ -85,18 +85,18 @@ class OrderService {
   public async getMyOrders(
     memberId: ObjectId,
     input: OrderInQuiry
-  ): Promise<Order> {
+  ): Promise<Order[]> {
     const { page, limit, orderStatus } = input;
 
-    const match: T = { memberId: memberId };
+    const match: T = { memberId: memberId, orderStatus: orderStatus };
     const sort: T = { updatedAt: -1 };
 
     const result = await this.orderModel
       .aggregate([
         { $match: match },
         { $sort: sort },
-        { $skip: (input.page - 1) * input.limit },
-        { $limit: input.limit },
+        { $skip: (page - 1) * limit },
+        { $limit: limit },
         {
           $lookup: {
             from: "orderItems",
@@ -105,20 +105,29 @@ class OrderService {
             as: "orderItemData",
           },
         },
-        {
-          $lookup: {
-            from: "products",
-            localField: "orderItemData.productId",
-            foreignField: "_id",
-            as: "productData",
-          },
-        },
       ])
       .exec();
 
     if (!result.length)
       throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
-    return result[0];
+
+    await Promise.all(
+      result.map(async (ele) => {
+        await Promise.all(
+          ele.orderItemData.map(async (item: any) => {
+            const productData = await this.productService.getProduct(
+              null,
+              item.productId
+            );
+            item.productData = productData;
+            return item;
+          })
+        );
+        return ele;
+      })
+    );
+
+    return result;
   }
 
   public async updateOrder(
