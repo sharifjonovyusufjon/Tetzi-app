@@ -5,11 +5,17 @@
     <div class="container">
       <div class="signup">
         <strong>Sign-Up</strong>
-        <form action="/admin/member/login" method="post">
+        <form
+          action="/admin/member/signup"
+          method="post"
+          onsubmit="return validateSignupForm()"
+          enctype="multipart/form-data"
+        >
           <div class="signup-box">
             <div class="box">
               <span>First Name</span>
               <input
+                class="member-first-name"
                 type="text"
                 name="memberFirstName"
                 placeholder="First Name"
@@ -21,6 +27,7 @@
               <span>Last Name</span>
               <input
                 type="text"
+                class="member-last-name"
                 name="memberLastName"
                 placeholder="Last Name"
                 required
@@ -34,6 +41,7 @@
               <input
                 type="text"
                 name="memberEmail"
+                class="member-email"
                 placeholder="company@gmail.com"
                 required
               />
@@ -44,6 +52,7 @@
               <input
                 type="text"
                 name="memberPhone"
+                class="member-phone"
                 placeholder="Your Phone Number"
                 required
               />
@@ -56,6 +65,7 @@
               <input
                 type="text"
                 name="memberAddress"
+                class="member-address1"
                 placeholder="4279 boncak Port Suite 780-9"
                 required
               />
@@ -66,6 +76,7 @@
               <input
                 type="text"
                 name="memberAddress"
+                class="member-address2"
                 placeholder="-------"
                 required
               />
@@ -78,6 +89,7 @@
               <input
                 type="text"
                 name="memberCity"
+                class="member-city"
                 placeholder="Your City"
                 required
               />
@@ -88,6 +100,7 @@
               <input
                 type="text"
                 name="memberPostCode"
+                class="member-post"
                 placeholder="78906"
                 required
               />
@@ -100,6 +113,7 @@
               <input
                 type="text"
                 name="memberPassword"
+                class="member-password"
                 placeholder="Password"
                 required
               />
@@ -110,6 +124,7 @@
               <input
                 type="text"
                 name="memberRepeadPassword"
+                class="member-confirm-password"
                 placeholder="Repead Password"
                 required
               />
@@ -118,13 +133,15 @@
 
           <div class="signup-box">
             <div class="box">
-              <img src="/img/logo.png" alt="" />
+              <img class="upload-img" src="/img/logo.png" alt="" />
             </div>
 
             <div class="box">
               <div class="file-input" for="file-in">
-                <span style="margin-top: 0px">Choose image</span>
-                <label for="file-in">Upload</label>
+                <span style="margin-top: 0px; padding-top: 22px"
+                  >Choose image</span
+                >
+                <label for="file-in" class="uploads-img">Upload</label>
               </div>
               <input
                 style="display: none"
@@ -141,7 +158,7 @@
         </form>
         <p>
           Save in account?
-          <a href="/admin/member/signup">Login</a>
+          <a href="/admin/member/login">Login</a>
         </p>
       </div>
     </div>
