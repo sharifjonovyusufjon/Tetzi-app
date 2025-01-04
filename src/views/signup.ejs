@@ -1,6 +1,151 @@
 <%- include('includes/header') %>
-<link rel="stylesheet" href="">
+<link rel="stylesheet" type="text/css" href="/css/signup.css" />
 <body>
-  signup
+  <div class="signup-page">
+    <div class="container">
+      <div class="signup">
+        <strong>Sign-Up</strong>
+        <form action="/admin/member/login" method="post">
+          <div class="signup-box">
+            <div class="box">
+              <span>First Name</span>
+              <input
+                type="text"
+                name="memberFirstName"
+                placeholder="First Name"
+                required
+              />
+            </div>
+
+            <div class="box">
+              <span>Last Name</span>
+              <input
+                type="text"
+                name="memberLastName"
+                placeholder="Last Name"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="signup-box">
+            <div class="box">
+              <span>Email Address</span>
+              <input
+                type="text"
+                name="memberEmail"
+                placeholder="company@gmail.com"
+                required
+              />
+            </div>
+
+            <div class="box">
+              <span>Telephone</span>
+              <input
+                type="text"
+                name="memberPhone"
+                placeholder="Your Phone Number"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="signup-box">
+            <div class="box">
+              <span>Address 1</span>
+              <input
+                type="text"
+                name="memberAddress"
+                placeholder="4279 boncak Port Suite 780-9"
+                required
+              />
+            </div>
+
+            <div class="box">
+              <span>Address 2</span>
+              <input
+                type="text"
+                name="memberAddress"
+                placeholder="-------"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="signup-box">
+            <div class="box">
+              <span>City</span>
+              <input
+                type="text"
+                name="memberCity"
+                placeholder="Your City"
+                required
+              />
+            </div>
+
+            <div class="box">
+              <span>Post Code</span>
+              <input
+                type="text"
+                name="memberPostCode"
+                placeholder="78906"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="signup-box">
+            <div class="box">
+              <span>Password</span>
+              <input
+                type="text"
+                name="memberPassword"
+                placeholder="Password"
+                required
+              />
+            </div>
+
+            <div class="box">
+              <span>Repeat Password</span>
+              <input
+                type="text"
+                name="memberRepeadPassword"
+                placeholder="Repead Password"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="signup-box">
+            <div class="box">
+              <img src="/img/logo.png" alt="" />
+            </div>
+
+            <div class="box">
+              <div class="file-input" for="file-in">
+                <span style="margin-top: 0px">Choose image</span>
+                <label for="file-in">Upload</label>
+              </div>
+              <input
+                style="display: none"
+                type="file"
+                name="memberImage"
+                id="file-in"
+                placeholder="Choose image"
+                required
+              />
+              <p>Please upload image only: jpg, jpeg or png formats allowed!</p>
+            </div>
+          </div>
+          <button type="submit">Signup</button>
+        </form>
+        <p>
+          Save in account?
+          <a href="/admin/member/signup">Login</a>
+        </p>
+      </div>
+    </div>
+  </div>
+  <script src="/js/signup.js"></script>
 </body>
 <%- include('includes/footer') %>

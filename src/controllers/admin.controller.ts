@@ -3,7 +3,7 @@ import { T } from "../libs/types/common";
 import { NextFunction, Request, Response } from "express";
 import { AdminRequest, LoginInput, MemberInput } from "../libs/types/member";
 import { Member } from "../libs/types/member";
-import { MemberType } from "../libs/enums/member.enum";
+import { MemberState, MemberType } from "../libs/enums/member.enum";
 import Errors, { HttpCode, Message } from "../libs/Errors";
 
 const adminController: T = {};
@@ -51,6 +51,7 @@ adminController.processSignup = async (req: AdminRequest, res: Response) => {
     const newMember: MemberInput = req.body;
     newMember.memberImage = req.file.path.replace(/\\/g, "/");
     newMember.memberType = MemberType.ADMIN;
+    newMember.memberState = MemberState.SEOUL;
     const result: Member = await memberService.processSignup(newMember);
 
     req.session.member = result;
