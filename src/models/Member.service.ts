@@ -121,7 +121,10 @@ class MemberService {
   }
 
   public async processLogin(input: LoginInput): Promise<Member> {
-    const search: T = { memberEmail: input.memberEmail };
+    const search: T = {
+      memberEmail: input.memberEmail,
+      memberType: MemberType.ADMIN,
+    };
     const target = await this.memberModel
       .findOne(search)
       .select({ memberPassword: 1 })

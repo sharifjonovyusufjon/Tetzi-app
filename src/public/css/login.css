@@ -1,0 +1,111 @@
+.login-page {
+  width: 100%;
+  height: auto;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.login-page .container {
+  width: 1300px;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.login-page .container .login {
+  margin-top: 120px;
+  width: 744px;
+  height: 831px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login strong {
+  font-family: "Jost";
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 40px;
+  letter-spacing: 0%;
+  text-align: left;
+  color: rgb(19, 39, 98);
+}
+
+.login form {
+  margin-top: 55px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.login form span {
+  margin-top: 26px;
+  font-family: "Jost";
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: 0%;
+  text-align: left;
+  color: rgb(19, 39, 98);
+}
+
+.login form input {
+  padding-left: 20px;
+  margin-top: 15px;
+  width: 608.12px;
+  height: 72.43px;
+
+  font-family: "Jost";
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: 0%;
+  text-align: left;
+  color: #a6a6a6;
+  box-sizing: border-box;
+  border: 1px solid #d4d4d4;
+  border-radius: 6px;
+  box-shadow: 0px 10px 20px 0px rgba(4, 30, 66, 0.05);
+  background: rgb(255, 255, 255);
+  outline: none;
+}
+
+.login form button {
+  margin-top: 26px;
+  width: 608.12px;
+  height: 72.43px;
+
+  color: white;
+  box-sizing: border-box;
+  border: 1px solid #ffd881;
+  border-radius: 6px;
+  box-shadow: 0px 5px 20px 0px rgba(245, 195, 75, 0.15);
+  background: #ffd881;
+  cursor: pointer;
+}
+
+.login p {
+  margin-top: 42px;
+  font-family: "Jost";
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: 0%;
+  text-align: center;
+  color: rgb(19, 39, 98);
+}
+
+.login p a {
+  margin-left: 10px;
+  font-family: "Jost";
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 28px;
+  letter-spacing: 0%;
+  text-align: center;
+  color: rgb(19, 39, 98);
+}

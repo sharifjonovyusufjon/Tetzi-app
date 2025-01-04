@@ -1,5 +1,36 @@
 <%- include('includes/header') %>
+<link rel="stylesheet" type="text/css" href="/css/login.css" />
 <body>
-  login
+  <div class="login-page">
+    <div class="container">
+      <div class="login">
+        <strong>Login-In</strong>
+        <form action="/admin/member/login" method="post">
+          <span>Email address</span>
+          <input
+            type="email"
+            name="memberEmail"
+            placeholder="company@gmail.com"
+            required
+          />
+
+          <span>Password</span>
+          <input
+            type="password"
+            name="memberPassword"
+            placeholder=". . . . . ."
+            required
+          />
+
+          <button type="submit">Login</button>
+        </form>
+        <p>
+          Don't have an account?
+          <a href="/admin/member/signup">Create account</a>
+        </p>
+      </div>
+    </div>
+  </div>
+  <script src="/js/login.js"></script>
 </body>
 <%- include('includes/footer') %>

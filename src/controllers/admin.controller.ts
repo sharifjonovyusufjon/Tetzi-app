@@ -15,8 +15,9 @@ adminController.goHome = (req: Request, res: Response) => {
     res.render("home");
   } catch (err) {
     console.log("Error, goHome:", err);
-    if (err instanceof Errors) res.status(err.code).json(err);
-    else res.status(Errors.standart.code).json(Errors.standart);
+    const message =
+      err instanceof Errors ? err.message : Message.SOMETHING_WENT_WRONG;
+    res.send(`<script> alert("${message}")</script>`);
   }
 };
 
@@ -26,8 +27,9 @@ adminController.goSignup = (req: Request, res: Response) => {
     res.render("signup");
   } catch (err) {
     console.log("Error, goSignup:", err);
-    if (err instanceof Errors) res.status(err.code).json(err);
-    else res.status(Errors.standart.code).json(Errors.standart);
+    const message =
+      err instanceof Errors ? err.message : Message.SOMETHING_WENT_WRONG;
+    res.send(`<script> alert("${message}")</script>`);
   }
 };
 
@@ -37,8 +39,9 @@ adminController.goLogin = (req: Request, res: Response) => {
     res.render("login");
   } catch (err) {
     console.log("Error, goLogin:", err);
-    if (err instanceof Errors) res.status(err.code).json(err);
-    else res.status(Errors.standart.code).json(Errors.standart);
+    const message =
+      err instanceof Errors ? err.message : Message.SOMETHING_WENT_WRONG;
+    res.send(`<script> alert("${message}")</script>`);
   }
 };
 
@@ -52,12 +55,13 @@ adminController.processSignup = async (req: AdminRequest, res: Response) => {
 
     req.session.member = result;
     req.session.save(function () {
-      res.json({ member: result });
+      res.redirect("/admin");
     });
   } catch (err) {
     console.log("Error, processSignup:", err);
-    if (err instanceof Errors) res.status(err.code).json(err);
-    else res.status(Errors.standart.code).json(Errors.standart);
+    const message =
+      err instanceof Errors ? err.message : Message.SOMETHING_WENT_WRONG;
+    res.send(`<script> alert("${message}")</script>`);
   }
 };
 
@@ -68,12 +72,13 @@ adminController.processLogin = async (req: AdminRequest, res: Response) => {
     const result: Member = await memberService.processLogin(member);
     req.session.member = result;
     req.session.save(function () {
-      res.json({ member: result });
+      res.redirect("/admin");
     });
   } catch (err) {
     console.log("Error, processLogin:", err);
-    if (err instanceof Errors) res.status(err.code).json(err);
-    else res.status(Errors.standart.code).json(Errors.standart);
+    const message =
+      err instanceof Errors ? err.message : Message.SOMETHING_WENT_WRONG;
+    res.send(`<script> alert("${message}")</script>`);
   }
 };
 
@@ -81,12 +86,13 @@ adminController.processLogout = async (req: AdminRequest, res: Response) => {
   try {
     console.log("processLogout");
     req.session.destroy(function () {
-      res.json({ processLogout: true });
+      res.redirect("/admin");
     });
   } catch (err) {
     console.log("Error, processLogout:", err);
-    if (err instanceof Errors) res.status(err.code).json(err);
-    else res.status(Errors.standart.code).json(Errors.standart);
+    const message =
+      err instanceof Errors ? err.message : Message.SOMETHING_WENT_WRONG;
+    res.send(`<script> alert("${message}")</script>`);
   }
 };
 
@@ -98,8 +104,9 @@ adminController.checkAdmin = async (req: AdminRequest, res: Response) => {
     } else res.send(Message.NOT_AUNTiCANTED);
   } catch (err) {
     console.log("Error, checkAdmin:", err);
-    if (err instanceof Errors) res.status(err.code).json(err);
-    else res.status(Errors.standart.code).json(Errors.standart);
+    const message =
+      err instanceof Errors ? err.message : Message.SOMETHING_WENT_WRONG;
+    res.send(`<script> alert("${message}")</script>`);
   }
 };
 
@@ -115,8 +122,9 @@ adminController.verifyAdmin = async (
     } else res.send(Message.NOT_AUNTiCANTED);
   } catch (err) {
     console.log("Error, verifyAdmin:", err);
-    if (err instanceof Errors) res.status(err.code).json(err);
-    else res.status(Errors.standart.code).json(Errors.standart);
+    const message =
+      err instanceof Errors ? err.message : Message.SOMETHING_WENT_WRONG;
+    res.send(`<script> alert("${message}")</script>`);
   }
 };
 
@@ -129,8 +137,9 @@ adminController.getAllMember = async (req: Request, res: Response) => {
     res.json({ members: result });
   } catch (err) {
     console.log("Error, getAllMember:", err);
-    if (err instanceof Errors) res.status(err.code).json(err);
-    else res.status(Errors.standart.code).json(Errors.standart);
+    const message =
+      err instanceof Errors ? err.message : Message.SOMETHING_WENT_WRONG;
+    res.send(`<script> alert("${message}")</script>`);
   }
 };
 
@@ -141,8 +150,9 @@ adminController.updateMember = async (req: Request, res: Response) => {
     res.json({ member: result });
   } catch (err) {
     console.log("Error, updateMember:", err);
-    if (err instanceof Errors) res.status(err.code).json(err);
-    else res.status(Errors.standart.code).json(Errors.standart);
+    const message =
+      err instanceof Errors ? err.message : Message.SOMETHING_WENT_WRONG;
+    res.send(`<script> alert("${message}")</script>`);
   }
 };
 
