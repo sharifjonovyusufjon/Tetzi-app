@@ -1,0 +1,53 @@
+<%- include('includes/header') %>
+<link rel="stylesheet" type="text/css" href="/css/home.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.js"></script>
+<body>
+  <div class="home-page">
+    <div class="container">
+      <div class="menu-box">
+        <li class="nav-item" style="cursor: pointer">
+          <a class="nav-link" href="/admin">Home</a>
+        </li>
+        <% if(!member) { %>
+        <li class="nav-item" style="cursor: pointer">
+          <a class="nav-link" href="/admin/member/signup">Signup</a>
+        </li>
+        <li class="nav-item" style="cursor: pointer">
+          <a class="nav-link" href="/admin/member/login">Login</a>
+        </li>
+        <% } else { %>
+        <li class="nav-item" style="cursor: pointer">
+          <a class="nav-link" href="/admin/product/all">Menu</a>
+        </li>
+        <li class="nav-item" style="cursor: pointer">
+          <a class="nav-link" href="/admin/user/all">Users</a>
+        </li>
+        <li class="nav-item" style="cursor: pointer">
+          <a class="nav-link" href="/admin/user/all">Orders</a>
+        </li>
+        <li class="nav-item" style="cursor: pointer">
+          <a class="nav-link" href="/admin/user/all">Comments</a>
+        </li>
+        <li
+          class="nav-item"
+          style="cursor: pointer"
+          onclick="return confirm('Do you want to logout?')"
+        >
+          <a class="nav-link" href="/admin/member/logout">Logout</a>
+        </li>
+
+        <% } %>
+      </div>
+      <div class="anima-box">
+        <div class="animation-wrapper">
+          <div class="stagger-visualizer">
+            <div class="cursor color-red"></div>
+            <div class="dots-wrapper"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="/js/home.js"></script>
+</body>
+<%- include('includes/footer') %>

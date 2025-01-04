@@ -12,7 +12,7 @@ const memberService = new MemberService();
 adminController.goHome = (req: Request, res: Response) => {
   try {
     console.log("goHome");
-    res.send("goHome");
+    res.render("home");
   } catch (err) {
     console.log("Error, goHome:", err);
     if (err instanceof Errors) res.status(err.code).json(err);
@@ -23,7 +23,7 @@ adminController.goHome = (req: Request, res: Response) => {
 adminController.goSignup = (req: Request, res: Response) => {
   try {
     console.log("goSignup");
-    res.send("goSignup");
+    res.render("signup");
   } catch (err) {
     console.log("Error, goSignup:", err);
     if (err instanceof Errors) res.status(err.code).json(err);
@@ -34,7 +34,7 @@ adminController.goSignup = (req: Request, res: Response) => {
 adminController.goLogin = (req: Request, res: Response) => {
   try {
     console.log("goLogin");
-    res.send("goLogin");
+    res.render("login");
   } catch (err) {
     console.log("Error, goLogin:", err);
     if (err instanceof Errors) res.status(err.code).json(err);
