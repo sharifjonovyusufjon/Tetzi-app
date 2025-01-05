@@ -4,7 +4,7 @@ import OrderService from "../models/Order.service";
 import { Request, Response } from "express";
 import { OrderInQuiry, OrderItemInput, UpdateOrder } from "../libs/types/order";
 import { OrderStatus } from "../libs/enums/order.enum";
-import Errors from "../libs/Errors";
+import Errors, { Message } from "../libs/Errors";
 
 const orderController: T = {};
 const orderService = new OrderService();
@@ -64,11 +64,12 @@ orderController.getOrders = async (req: Request, res: Response) => {
   try {
     console.log("getOrders");
     const result = await orderService.getOrders();
-    res.json({ order: result });
+    res.render("orders", { orders: result });
   } catch (err) {
     console.log("Error, getOrders:", err);
-    if (err instanceof Errors) res.status(err.code).json(err);
-    else res.status(Errors.standart.code).json(Errors.standart);
+    const message =
+      err instanceof Errors ? err.message : Message.SOMETHING_WENT_WRONG;
+    res.send(`<script> alert("${message}")</script>`);
   }
 };
 

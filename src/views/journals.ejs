@@ -1,8 +1,7 @@
 <%- include('includes/header') %>
-<link rel="stylesheet" type="text/css" href="/css/home.css" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.js"></script>
+<link rel="stylesheet" type="text/css" href="/css/journals.css" />
 <body>
-  <div class="home-page">
+  <div class="journals-page">
     <div class="container">
       <div class="menu-box">
         <li class="nav-item" style="cursor: pointer">
@@ -41,16 +40,13 @@
 
         <% } %>
       </div>
-      <div class="anima-box">
-        <div class="animation-wrapper">
-          <div class="stagger-visualizer">
-            <div class="cursor color-red"></div>
-            <div class="dots-wrapper"></div>
-          </div>
-        </div>
+      <div class="boxes">
+        <% journals.map((value, key) => { %>
+        <div><%= value.journalTitle %></div>
+        <% }) %>
       </div>
     </div>
   </div>
-  <script src="/js/home.js"></script>
+  <script src="/js/journals.js"></script>
 </body>
 <%- include('includes/footer') %>

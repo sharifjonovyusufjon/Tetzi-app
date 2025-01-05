@@ -135,7 +135,7 @@ adminController.getAllMember = async (req: Request, res: Response) => {
   try {
     console.log("getAllMember");
     const result: Member[] = await memberService.getAllMember();
-    res.json({ members: result });
+    res.render("users", { users: result });
   } catch (err) {
     console.log("Error, getAllMember:", err);
     const message =

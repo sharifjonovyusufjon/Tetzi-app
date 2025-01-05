@@ -1,0 +1,46 @@
+.journals-page {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.journals-page .container {
+  width: 1300px;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.journals-page .container .menu-box {
+  width: 100%;
+  height: 200px;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.journals-page .container .menu-box .nav-item {
+  font-family: "Nunito Black";
+  font-size: 32px;
+  font-weight: 900;
+  line-height: 87px;
+  letter-spacing: 0px;
+  text-align: left;
+  color: rgb(19, 39, 98);
+  list-style: none;
+}
+
+.journals-page .container .menu-box .nav-item .nav-link {
+  color: rgb(19, 39, 98);
+}
+
+.journals-page .container .boxes {
+  width: 100%;
+  height: auto;
+}

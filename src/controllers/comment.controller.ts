@@ -4,7 +4,7 @@ import CommentService from "../models/Comment.service";
 import { ExtendedRequest } from "../libs/types/member";
 import { CommentInput } from "../libs/types/comment";
 import { shapeIntoMongooseObjectId } from "../libs/config";
-import Errors from "../libs/Errors";
+import Errors, { Message } from "../libs/Errors";
 
 const commentController: T = {};
 const commentService = new CommentService();
@@ -33,11 +33,12 @@ commentController.getAllComment = async (req: Request, res: Response) => {
   try {
     console.log("getAllComment");
     const result = await commentService.getAllComment();
-    res.json({ comment: result });
+    res.render("comments", { comments: result });
   } catch (err) {
     console.log("Error, getAllComment:", err);
-    if (err instanceof Errors) res.status(err.code).json(err);
-    else res.status(Errors.standart.code).json(Errors.standart);
+    const message =
+      err instanceof Errors ? err.message : Message.SOMETHING_WENT_WRONG;
+    res.send(`<script> alert("${message}")</script>`);
   }
 };
 
@@ -49,8 +50,9 @@ commentController.removeComment = async (req: Request, res: Response) => {
     res.json({ comment: result });
   } catch (err) {
     console.log("Error, removeComment:", err);
-    if (err instanceof Errors) res.status(err.code).json(err);
-    else res.status(Errors.standart.code).json(Errors.standart);
+    const message =
+      err instanceof Errors ? err.message : Message.SOMETHING_WENT_WRONG;
+    res.send(`<script> alert("${message}")</script>`);
   }
 };
 

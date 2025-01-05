@@ -131,8 +131,9 @@ productController.createProduct = async (req: AdminRequest, res: Response) => {
     res.json({ product: result });
   } catch (err) {
     console.log("Error, createProduct:", err);
-    if (err instanceof Errors) res.status(err.code).json(err);
-    else res.status(Errors.standart.code).json(Errors.standart);
+    const message =
+      err instanceof Errors ? err.message : Message.SOMETHING_WENT_WRONG;
+    res.send(`<script> alert("${message}")</script>`);
   }
 };
 
@@ -145,8 +146,9 @@ productController.updateProduct = async (req: Request, res: Response) => {
     res.json({ product: result });
   } catch (err) {
     console.log("Error, updateProduct:", err);
-    if (err instanceof Errors) res.status(err.code).json(err);
-    else res.status(Errors.standart.code).json(Errors.standart);
+    const message =
+      err instanceof Errors ? err.message : Message.SOMETHING_WENT_WRONG;
+    res.send(`<script> alert("${message}")</script>`);
   }
 };
 
@@ -154,11 +156,12 @@ productController.getAllProduct = async (req: Request, res: Response) => {
   try {
     console.log("getAllProduct");
     const result = await productService.getAllProduct();
-    res.json({ product: result });
+    res.render("products", { products: result });
   } catch (err) {
     console.log("Error, getAllProduct:", err);
-    if (err instanceof Errors) res.status(err.code).json(err);
-    else res.status(Errors.standart.code).json(Errors.standart);
+    const message =
+      err instanceof Errors ? err.message : Message.SOMETHING_WENT_WRONG;
+    res.send(`<script> alert("${message}")</script>`);
   }
 };
 export default productController;

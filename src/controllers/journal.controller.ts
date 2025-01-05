@@ -100,11 +100,12 @@ journalController.getAllJournal = async (req: Request, res: Response) => {
   try {
     console.log("getAllProduct");
     const result = await journalService.getAllJournal();
-    res.json({ journal: result });
+    res.render("journals", { journals: result });
   } catch (err) {
     console.log("Error, getAllJournal:", err);
-    if (err instanceof Errors) res.status(err.code).json(err);
-    else res.status(Errors.standart.code).json(Errors.standart);
+    const message =
+      err instanceof Errors ? err.message : Message.SOMETHING_WENT_WRONG;
+    res.send(`<script> alert("${message}")</script>`);
   }
 };
 
