@@ -57,10 +57,10 @@
               <td><%= value.orderTotal %></td>
               <td><%= value.orderDelivery %></td>
               <td>
-                <select class="" id="<%= value._id %>">
-                  <option value="PAUSE" <%= value.memberStatus === 'PAUSE' ? 'selected' : '' %>>PAUSE</option>
-                  <option value="PROCESS" <%= value.memberStatus === 'PROCESS' ? 'selected' : '' %>>PROCESS</option>
-                  <option value="FINISH" <%= value.memberStatus === 'FINISH' ? 'selected' : '' %>>FINISH</option>
+                <select class="order-status" id="<%= value._id %>">
+                  <option value="PAUSE" <%= value.orderStatus === 'PAUSE' ? 'selected' : '' %>>PAUSE</option>
+                  <option value="PROCESS" <%= value.orderStatus === 'PROCESS' ? 'selected' : '' %>>PROCESS</option>
+                  <option value="FINISH" <%= value.orderStatus === 'FINISH' ? 'selected' : '' %>>FINISH</option>
                 </select>
               </td>
             </tbody>

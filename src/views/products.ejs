@@ -59,7 +59,7 @@
               <td><%= value.productDesc %></td>
               <td><%= value.productPrice %></td>
               <td>
-                <select class="" id="<%= value._id %>">
+                <select class="product-status" id="<%= value._id %>">
                   <option value="PAUSE" <%= value.productStatus === 'PAUSE' ? 'selected' : '' %>>PAUSE</option>
                   <option value="PROCESS" <%= value.productStatus === 'PROCESS' ? 'selected' : '' %>>PROCESS</option>
                   <option value="DELETE" <%= value.productStatus === 'DELETE' ? 'selected' : '' %>>DELETE</option>

@@ -55,7 +55,9 @@
               <td><%= key+1 %></td>
               <td><%= value.commentContext %></td>
               <td>
-                <button id="<%= value._id %>">DELETE</button>
+                <button class="comment-delete" id="<%= value._id %>">
+                  DELETE
+                </button>
               </td>
             </tbody>
             <% }) %>

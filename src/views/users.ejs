@@ -59,7 +59,7 @@
               <td><%= value.memberEmail %></td>
               <td><%= value.memberPhone %></td>
               <td>
-                <select class="" id="<%= value._id %>">
+                <select class="member-status" id="<%= value._id %>">
                   <option value="ACTIVE" <%= value.memberStatus === 'ACTIVE' ? 'selected' : '' %>>ACTIVE</option>
                   <option value="BLOCK" <%= value.memberStatus === 'BLOCK' ? 'selected' : '' %>>BLOCK</option>
                   <option value="DELETE" <%= value.memberStatus === 'DELETE' ? 'selected' : '' %>>DELETE</option>

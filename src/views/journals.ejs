@@ -57,10 +57,10 @@
               <td><%= value.journalTitle %></td>
               <td><%= value.journalContext %></td>
               <td>
-                <select class="" id="<%= value._id %>">
-                  <option value="PAUSE" <%= value.memberStatus === 'PAUSE' ? 'selected' : '' %>>PAUSE</option>
-                  <option value="PROCESS" <%= value.memberStatus === 'PROCESS' ? 'selected' : '' %>>PROCESS</option>
-                  <option value="DELETE" <%= value.memberStatus === 'DELETE' ? 'selected' : '' %>>DELETE</option>
+                <select class="journal-status" id="<%= value._id %>">
+                  <option value="PAUSE" <%= value.journalStatus === 'PAUSE' ? 'selected' : '' %>>PAUSE</option>
+                  <option value="PROCESS" <%= value.journalStatus === 'PROCESS' ? 'selected' : '' %>>PROCESS</option>
+                  <option value="DELETE" <%= value.journalStatus === 'DELETE' ? 'selected' : '' %>>DELETE</option>
                 </select>
               </td>
             </tbody>
