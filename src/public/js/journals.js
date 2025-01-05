@@ -24,4 +24,14 @@ $(function () {
         alert("Journal status update failed!");
       });
   });
+
+  $(".new-button").on("click", () => {
+    $(".product-container").slideToggle(500);
+    $(".new-button").css("display", "none");
+  });
+
+  $(".cancel-button").on("click", () => {
+    $(".product-container").slideToggle(100);
+    $(".new-button").css("display", "flex");
+  });
 });

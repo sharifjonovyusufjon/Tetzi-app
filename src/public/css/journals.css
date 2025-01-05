@@ -127,3 +127,96 @@
   border: 1px solid #f6f6f6;
   outline: none;
 }
+
+/* new box */
+
+.journals-page .container .new-box {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  width: 1300px;
+  height: auto;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.journals-page .container .new-box .button-box {
+  margin-top: 45px;
+  width: 1300px;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.journals-page .container .new-box .new-button {
+  width: 200px;
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  font-family: "Nunito ExtraBold";
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 19px;
+  letter-spacing: 0px;
+  text-align: center;
+  color: rgb(255, 255, 255);
+  border-radius: 7px;
+  background: rgb(255, 216, 129);
+  border: none;
+  cursor: pointer;
+}
+
+.journals-page .container .new-box .button-box .cancel-button {
+  width: 200px;
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  font-family: "Nunito ExtraBold";
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 19px;
+  letter-spacing: 0px;
+  text-align: center;
+  color: rgb(255, 255, 255);
+  border-radius: 7px;
+  background: rgb(255, 184, 204);
+  border: none;
+  cursor: pointer;
+}
+
+.journals-page .container .new-box .button-box .create-button {
+  width: 200px;
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  font-family: "Nunito ExtraBold";
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 19px;
+  letter-spacing: 0px;
+  text-align: center;
+  color: rgb(255, 255, 255);
+  border-radius: 7px;
+  background: rgb(134, 212, 245);
+  border: none;
+  cursor: pointer;
+}
+
+.journals-page .container .new-box .form-box {
+  width: 1300px;
+  height: 200px;
+  background-color: rgb(222, 186, 255);
+}
