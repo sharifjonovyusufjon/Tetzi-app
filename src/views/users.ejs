@@ -41,9 +41,34 @@
         <% } %>
       </div>
       <div class="boxes">
-        <% users.map((value, key) => { %>
-        <div><%= value.memberFirstName %></div>
-        <% }) %>
+        <div class="menu-title">Users List</div>
+        <div class="menu">
+          <table class="table">
+            <thead>
+              <th>T/r</th>
+              <th>FirstName</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>Status</th>
+            </thead>
+
+            <% users.map((value, key) => { %>
+            <tbody>
+              <td><%= key+1 %></td>
+              <td><%= value.memberFirstName %></td>
+              <td><%= value.memberEmail %></td>
+              <td><%= value.memberPhone %></td>
+              <td>
+                <select class="" id="<%= value._id %>">
+                  <option value="ACTIVE" <%= value.memberStatus === 'ACTIVE' ? 'selected' : '' %>>ACTIVE</option>
+                  <option value="BLOCK" <%= value.memberStatus === 'BLOCK' ? 'selected' : '' %>>BLOCK</option>
+                  <option value="DELETE" <%= value.memberStatus === 'DELETE' ? 'selected' : '' %>>DELETE</option>
+                </select>
+              </td>
+            </tbody>
+            <% }) %>
+          </table>
+        </div>
       </div>
     </div>
   </div>

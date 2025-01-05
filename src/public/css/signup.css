@@ -5,6 +5,11 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  background: linear-gradient(
+    90deg,
+    rgb(253, 250, 245) 22.714%,
+    rgba(253, 250, 245, 0.11) 100%
+  );
 }
 
 .signup-page .container {

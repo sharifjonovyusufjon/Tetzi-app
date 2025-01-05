@@ -41,9 +41,32 @@
         <% } %>
       </div>
       <div class="boxes">
-        <% orders.map((value, key) => { %>
-        <div><%= value.orderStatus %></div>
-        <% }) %>
+        <div class="menu-title">Orders List</div>
+        <div class="menu">
+          <table class="table">
+            <thead>
+              <th>T/r</th>
+              <th>OrderTotal</th>
+              <th>OrderDelivery</th>
+              <th>Status</th>
+            </thead>
+
+            <% orders.map((value, key) => { %>
+            <tbody>
+              <td><%= key+1 %></td>
+              <td><%= value.orderTotal %></td>
+              <td><%= value.orderDelivery %></td>
+              <td>
+                <select class="" id="<%= value._id %>">
+                  <option value="PAUSE" <%= value.memberStatus === 'PAUSE' ? 'selected' : '' %>>PAUSE</option>
+                  <option value="PROCESS" <%= value.memberStatus === 'PROCESS' ? 'selected' : '' %>>PROCESS</option>
+                  <option value="FINISH" <%= value.memberStatus === 'FINISH' ? 'selected' : '' %>>FINISH</option>
+                </select>
+              </td>
+            </tbody>
+            <% }) %>
+          </table>
+        </div>
       </div>
     </div>
   </div>

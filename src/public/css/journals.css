@@ -5,6 +5,11 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  background: linear-gradient(
+    90deg,
+    rgb(253, 250, 245) 22.714%,
+    rgba(253, 250, 245, 0.11) 100%
+  );
 }
 
 .journals-page .container {
@@ -43,4 +48,82 @@
 .journals-page .container .boxes {
   width: 100%;
   height: auto;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.journals-page .container .boxes .menu-title {
+  margin-bottom: 30px;
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  font-family: "Nunito";
+  font-size: 25px;
+  font-weight: 700;
+  line-height: 36px;
+  letter-spacing: 0px;
+  text-align: left;
+  color: rgb(19, 39, 98);
+}
+
+.journals-page .container .boxes .table {
+  width: 100%;
+  height: auto;
+  border: 1px solid #f6f6f6;
+}
+
+.journals-page .container .boxes .table thead {
+  width: 100%;
+  height: auto;
+}
+
+.journals-page .container .boxes .table tbody {
+  width: 100%;
+  height: auto;
+}
+
+.journals-page .container .boxes .table thead th {
+  width: 100px;
+  height: 40px;
+  align-items: center;
+
+  background-color: rgb(255, 216, 129);
+  color: rgb(255, 255, 255);
+  border: 1px solid #f6f6f6;
+}
+
+.journals-page .container .boxes .table tbody td {
+  width: 100px;
+  height: 30px;
+  align-items: center;
+
+  font-family: "Nunito";
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 30px;
+  letter-spacing: 0px;
+  text-align: left;
+
+  color: rgb(115, 115, 115);
+  background-color: rgb(186, 234, 255);
+  border: 1px solid #f6f6f6;
+}
+
+.journals-page .container .boxes .table tbody td select {
+  font-family: "Nunito";
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 30px;
+  letter-spacing: 0px;
+  text-align: left;
+
+  color: rgb(115, 115, 115);
+  border: 1px solid #f6f6f6;
+  outline: none;
 }

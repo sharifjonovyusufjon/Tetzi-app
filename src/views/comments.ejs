@@ -41,9 +41,26 @@
         <% } %>
       </div>
       <div class="boxes">
-        <% comments.map((value, key) => { %>
-        <div><%= value.commentContext %></div>
-        <% }) %>
+        <div class="menu-title">Comments List</div>
+        <div class="menu">
+          <table class="table">
+            <thead>
+              <th>T/r</th>
+              <th>CommentContext</th>
+              <th>CommentDelete</th>
+            </thead>
+
+            <% comments.map((value, key) => { %>
+            <tbody>
+              <td><%= key+1 %></td>
+              <td><%= value.commentContext %></td>
+              <td>
+                <button id="<%= value._id %>">DELETE</button>
+              </td>
+            </tbody>
+            <% }) %>
+          </table>
+        </div>
       </div>
     </div>
   </div>

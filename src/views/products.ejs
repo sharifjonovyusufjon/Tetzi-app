@@ -41,9 +41,34 @@
         <% } %>
       </div>
       <div class="boxes">
-        <% products.map((value, key) => { %>
-        <div><%= value.productName %></div>
-        <% }) %>
+        <div class="menu-title">Products List</div>
+        <div class="menu">
+          <table class="table">
+            <thead>
+              <th>T/r</th>
+              <th>ProductName</th>
+              <th>ProductDesc</th>
+              <th>ProductPrice</th>
+              <th>Status</th>
+            </thead>
+
+            <% products.map((value, key) => { %>
+            <tbody>
+              <td><%= key+1 %></td>
+              <td><%= value.productName %></td>
+              <td><%= value.productDesc %></td>
+              <td><%= value.productPrice %></td>
+              <td>
+                <select class="" id="<%= value._id %>">
+                  <option value="PAUSE" <%= value.productStatus === 'PAUSE' ? 'selected' : '' %>>PAUSE</option>
+                  <option value="PROCESS" <%= value.productStatus === 'PROCESS' ? 'selected' : '' %>>PROCESS</option>
+                  <option value="DELETE" <%= value.productStatus === 'DELETE' ? 'selected' : '' %>>DELETE</option>
+                </select>
+              </td>
+            </tbody>
+            <% }) %>
+          </table>
+        </div>
       </div>
     </div>
   </div>
