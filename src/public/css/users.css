@@ -118,7 +118,7 @@
 .users-page .container .boxes .table tbody td img {
   width: 30px;
   height: 30px;
-  object-fit: contain;
+  /* object-fit: contain; */
   border-radius: 50%;
   background-color: rgb(115, 115, 115);
 }
