@@ -34,4 +34,51 @@ $(function () {
     $(".product-container").slideToggle(100);
     $(".new-button").css("display", "flex");
   });
+
+  const fileTarget = $("#file");
+  let filename;
+
+  fileTarget.on("change", function () {
+    if (window.FileReader) {
+      const uploadFile = $(this)[0].files[0];
+      const uploads = $(this)[0];
+      console.log("this: ", uploads);
+      console.log(uploadFile);
+      const fileType = uploadFile["type"];
+      const validImageType = ["image/jpg", "image/jpeg", "image/png"];
+      if (!validImageType.includes(fileType)) {
+        alert("Please insert jpg, jpeg and png!");
+      } else {
+        if (uploadFile) {
+          console.log(URL.createObjectURL(uploadFile));
+          $(".one")
+            .attr("src", URL.createObjectURL(uploadFile))
+            .addClass("succsess!");
+        }
+        filename = $(this)[0].files[0].name;
+      }
+      $(this).siblings(".one").val(filename);
+    }
+  });
 });
+
+function validateJournalForm() {
+  const journalTitle = $(".journal-title").val(),
+    journalContext = $(".journal-category").val(),
+    journalCategory = $(".journal-desc").val();
+
+  if (journalTitle === "" || journalContext === "" || journalCategory === "") {
+    alert("Please insert all required inputs!");
+    return false;
+  }
+
+  const journalImage = $(".image-one").get(0).files[0].name
+    ? $(".image-one").get(0).files[0].name
+    : null;
+
+  console.log("journalImage", journalImage);
+  if (!memberImage) {
+    alert("Please insert journal image!");
+    return false;
+  }
+}

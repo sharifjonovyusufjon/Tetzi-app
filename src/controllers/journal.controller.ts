@@ -73,7 +73,7 @@ journalController.createJournal = async (req: AdminRequest, res: Response) => {
     input.journalImage = req.file.path.replace(/\\/g, "/");
 
     const result = await journalService.createJournal(input);
-    res.json({ journal: result });
+    res.redirect("/admin/journal/all");
   } catch (err) {
     console.log("Error, createJournal:", err);
     if (err instanceof Errors) res.status(err.code).json(err);

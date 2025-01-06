@@ -128,7 +128,7 @@ productController.createProduct = async (req: AdminRequest, res: Response) => {
     });
 
     const result = await productService.createProduct(input);
-    res.json({ product: result });
+    res.redirect("/admin/product/all");
   } catch (err) {
     console.log("Error, createProduct:", err);
     const message =

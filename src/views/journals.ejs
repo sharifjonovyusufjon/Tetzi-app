@@ -74,16 +74,17 @@
         action="/admin/journal/create"
         method="POST"
         enctype="multipart/form-data"
+        onsubmit="return validateJournalForm()"
         style="display: none;">
         <div class="form-box">
           <strong>New Journal Creation</strong>
           <div class="box">
             <div class="input-box">
               <span>Journal Title</span>
-              <input type="text" placeholder="Journal Title" name="journalTitle">
+              <input type="text" placeholder="Journal Title" class="journal-title" name="journalTitle">
             </div>
             <div class="input-box">
-              <span>Journal Category</span> <select name="journalCategory" id="">
+              <span>Journal Category</span> <select name="journalCategory" class="journal-category" id="">
                 <option value="TOYS">TOYS</option>
                 <option value="CLOTHES">CLOTHES</option>
                 <option value="PAMPERS">PAMPERS</option>
@@ -94,7 +95,7 @@
           <div class="box">
             <div class="input-box-m">
               <span>Journal  Context</span>
-              <input type="text" placeholder="Journal  Context" name="journalContext">
+              <input type="text" placeholder="Journal  Context" class="journal-desc" name="journalContext">
             </div>
           </div>
           <div class="image-box">

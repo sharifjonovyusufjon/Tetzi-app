@@ -74,19 +74,22 @@
         <button class="new-button">Add New Product</button>
         <form action="/admin/product/create"
         method="POST"
-        enctype="multipart/form-data" class="product-container" style="display: none;">
+        onsubmit="return validateProductForm()"
+        enctype="multipart/form-data"
+         class="product-container"
+          style="display: none;">
           <div class="form-box">
             <strong>New Product Creation</strong>
             <div class="box">
               <div class="input-box-x">
                 <span>Product Name</span>
-                <input type="text" placeholder="Product Name" name="productName">
+                <input type="text" placeholder="Product Name" name="productName" class="product-name">
               </div>
             </div>
             <div class="box">
               <div class="input-box">
                 <span>Product Brand</span>
-                <select name="productBrand" id="">
+                <select name="productBrand" id="" class="product-brand">
                   <option value="UPPABABY">UPPABABY</option>
                   <option value="LEGO">LEGO</option>
                   <option value="MATTEL">MATTEL</option>
@@ -99,7 +102,7 @@
               </div>
               <div class="input-box">
                 <span>Product Category</span>
-                <select name="productCategory" id="">
+                <select name="productCategory" id="" class="product-category">
                   <option value="TOYS">TOYS</option>
                   <option value="CLOTHES">CLOTHES</option>
                   <option value="PAMPERS">PAMPERS</option>
@@ -110,11 +113,11 @@
             <div class="box">
               <div class="input-box">
                 <span>Product Price</span>
-                <input type="text" placeholder="Product Price" name="productPrice">
+                <input type="text" placeholder="Product Price" name="productPrice" class="product-price">
               </div>
               <div class="input-box">
                 <span>Product Color</span>
-                <select name="productColor" id="">
+                <select name="productColor" id="" class="product-color">
                   <option value="RED">RED</option>
                   <option value="BLUE">BLUE</option>
                   <option value="GREEN">GREEN</option>
@@ -131,11 +134,11 @@
             <div class="box">
               <div class="input-box">
                 <span>Product Count</span>
-                <input type="text" placeholder="Product Count" name="productCount">
+                <input type="text" placeholder="Product Count" name="productCount" class="product-count">
               </div>
               <div class="input-box">
                 <span>Product Size</span>
-                <select name="productSize" id="">
+                <select name="productSize" id="" class="product-size">
                   <option value="S">S</option>
                   <option value="M">M</option>
                   <option value="L">L</option>
@@ -147,7 +150,7 @@
             <div class="box">
               <div class="input-box-m">
                 <span>Product Description</span>
-                <input type="text" placeholder="Product Description" name="productDesc">
+                <input type="text" placeholder="Product Description" name="productDesc" class="product-desc">
               </div>
             </div>
             <div class="image-box">
@@ -157,9 +160,9 @@
                   type="file"
                   id="file"
                   name="productImages"
-                  class="image-one"
+                  class="image-1"
                   required
-                  onchange="/*previewFileHandler(this, 1)*/"
+                  onchange="previewFileHandler(this, 1)"
                 />
               </div>
               <div class="upload-img-box">
@@ -168,9 +171,9 @@
                   type="file"
                   id="file"
                   name="productImages"
-                  class="image-one"
+                  class="image-2"
                   required
-                  onchange="/*previewFileHandler(this, 1)*/"
+                  onchange="previewFileHandler(this, 2)"
                 />
               </div>
               <div class="upload-img-box">
@@ -179,9 +182,9 @@
                   type="file"
                   id="file"
                   name="productImages"
-                  class="image-one"
+                  class="image-3"
                   required
-                  onchange="/*previewFileHandler(this, 1)*/"
+                  onchange="previewFileHandler(this, 3)"
                 />
               </div>
               <div class="upload-img-box">
@@ -190,9 +193,9 @@
                   type="file"
                   id="file"
                   name="productImages"
-                  class="image-one"
+                  class="image-4"
                   required
-                  onchange="/*previewFileHandler(this, 1)*/"
+                  onchange="previewFileHandler(this, 4)"
                 />
               </div>
               <div class="upload-img-box">
@@ -201,9 +204,9 @@
                   type="file"
                   id="file"
                   name="productImages"
-                  class="image-one"
+                  class="image-5"
                   required
-                  onchange="/*previewFileHandler(this, 1)*/"
+                  onchange="previewFileHandler(this, 5)"
                 />
               </div>
             </div>
