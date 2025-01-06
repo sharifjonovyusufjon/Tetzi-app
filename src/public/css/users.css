@@ -73,7 +73,7 @@
 }
 
 .users-page .container .boxes .table {
-  width: 100%;
+  width: 1300px;
   height: auto;
   border: 1px solid #f6f6f6;
 }
@@ -113,6 +113,14 @@
   color: rgb(115, 115, 115);
   background-color: rgb(186, 234, 255);
   border: 1px solid #f6f6f6;
+}
+
+.users-page .container .boxes .table tbody td img {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+  border-radius: 50%;
+  background-color: rgb(115, 115, 115);
 }
 
 .users-page .container .boxes .table tbody td select {

@@ -46,6 +46,7 @@
           <table class="table">
             <thead>
               <th>T/r</th>
+              <th>Image</th>
               <th>FirstName</th>
               <th>Email</th>
               <th>Phone</th>
@@ -55,6 +56,7 @@
             <% users.map((value, key) => { %>
             <tbody>
               <td><%= key+1 %></td>
+              <td><img src="http://localhost:7007/<%= value.memberImage %>" alt=""></td>
               <td><%= value.memberFirstName %></td>
               <td><%= value.memberEmail %></td>
               <td><%= value.memberPhone %></td>
