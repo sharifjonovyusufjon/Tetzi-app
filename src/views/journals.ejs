@@ -70,10 +70,49 @@
       </div>
       <div class="new-box">
         <button class="new-button">Add New Journal</button>
-        <form action="" class="product-container" style="display: none;">
-          <div class="form-box"></div>
+        <form class="product-container"
+        action="/admin/journal/create"
+        method="POST"
+        enctype="multipart/form-data"
+        style="display: none;">
+        <div class="form-box">
+          <strong>New Journal Creation</strong>
+          <div class="box">
+            <div class="input-box">
+              <span>Journal Title</span>
+              <input type="text" placeholder="Journal Title" name="journalTitle">
+            </div>
+            <div class="input-box">
+              <span>Journal Category</span> <select name="journalCategory" id="">
+                <option value="TOYS">TOYS</option>
+                <option value="CLOTHES">CLOTHES</option>
+                <option value="PAMPERS">PAMPERS</option>
+                <option value="STROLLER">STROLLER</option>
+              </select>
+            </div>
+          </div>
+          <div class="box">
+            <div class="input-box-m">
+              <span>Journal  Context</span>
+              <input type="text" placeholder="Journal  Context" name="journalContext">
+            </div>
+          </div>
+          <div class="image-box">
+            <div class="upload-img-box">
+              <img src="/img/image-upload.jpg" class="one" id="image-section" />
+              <input
+                type="file"
+                id="file"
+                name="journalImage"
+                class="image-one"
+                required
+                onchange="/*previewFileHandler(this, 1)*/"
+              />
+            </div>
+          </div>
+        </div>
           <div class="button-box">
-            <button class="cancel-button">Cancel</button> 
+            <button class="cancel-button" type="button">Cancel</button> 
             <button class="create-button" type="submit">Create</button>
           </div>
         </form>

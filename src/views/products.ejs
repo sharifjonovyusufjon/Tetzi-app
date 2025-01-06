@@ -72,10 +72,144 @@
       </div>
       <div class="new-box">
         <button class="new-button">Add New Product</button>
-        <form action="" class="product-container" style="display: none;">
-          <div class="form-box"></div>
+        <form action="/admin/product/create"
+        method="POST"
+        enctype="multipart/form-data" class="product-container" style="display: none;">
+          <div class="form-box">
+            <strong>New Product Creation</strong>
+            <div class="box">
+              <div class="input-box-x">
+                <span>Product Name</span>
+                <input type="text" placeholder="Product Name" name="productName">
+              </div>
+            </div>
+            <div class="box">
+              <div class="input-box">
+                <span>Product Brand</span>
+                <select name="productBrand" id="">
+                  <option value="UPPABABY">UPPABABY</option>
+                  <option value="LEGO">LEGO</option>
+                  <option value="MATTEL">MATTEL</option>
+                  <option value="CARTER">CARTER</option>
+                  <option value="BUGABOO">BUGABOO</option>
+                  <option value="ZARA">ZARA</option>
+                  <option value="PAMPERS">PAMPERS</option>
+                  <option value="TOMME">TOMME</option>
+                </select>
+              </div>
+              <div class="input-box">
+                <span>Product Category</span>
+                <select name="productCategory" id="">
+                  <option value="TOYS">TOYS</option>
+                  <option value="CLOTHES">CLOTHES</option>
+                  <option value="PAMPERS">PAMPERS</option>
+                  <option value="STROLLER">STROLLER</option>
+                </select>
+              </div>
+            </div>
+            <div class="box">
+              <div class="input-box">
+                <span>Product Price</span>
+                <input type="text" placeholder="Product Price" name="productPrice">
+              </div>
+              <div class="input-box">
+                <span>Product Color</span>
+                <select name="productColor" id="">
+                  <option value="RED">RED</option>
+                  <option value="BLUE">BLUE</option>
+                  <option value="GREEN">GREEN</option>
+                  <option value="YELLOW">YELLOW</option>
+                  <option value="BLACK">BLACK</option>
+                  <option value="WHITE">WHITE</option>
+                  <option value="GRAY">GRAY</option>
+                  <option value="BROWN">BROWN</option>
+                  <option value="PINK">PINK</option>
+                  <option value="ORANGE">ORANGE</option>
+                </select>
+              </div>
+            </div>
+            <div class="box">
+              <div class="input-box">
+                <span>Product Count</span>
+                <input type="text" placeholder="Product Count" name="productCount">
+              </div>
+              <div class="input-box">
+                <span>Product Size</span>
+                <select name="productSize" id="">
+                  <option value="S">S</option>
+                  <option value="M">M</option>
+                  <option value="L">L</option>
+                  <option value="XL">XL</option>
+                  <option value="XXL">XXL</option>
+                </select>
+              </div>
+            </div>
+            <div class="box">
+              <div class="input-box-m">
+                <span>Product Description</span>
+                <input type="text" placeholder="Product Description" name="productDesc">
+              </div>
+            </div>
+            <div class="image-box">
+              <div class="upload-img-box">
+                <img src="/img/image-upload.jpg" class="1" id="image-section-1" />
+                <input
+                  type="file"
+                  id="file"
+                  name="productImages"
+                  class="image-one"
+                  required
+                  onchange="/*previewFileHandler(this, 1)*/"
+                />
+              </div>
+              <div class="upload-img-box">
+                <img src="/img/image-upload.jpg" class="2" id="image-section-2" />
+                <input
+                  type="file"
+                  id="file"
+                  name="productImages"
+                  class="image-one"
+                  required
+                  onchange="/*previewFileHandler(this, 1)*/"
+                />
+              </div>
+              <div class="upload-img-box">
+                <img src="/img/image-upload.jpg" class="3" id="image-section-3" />
+                <input
+                  type="file"
+                  id="file"
+                  name="productImages"
+                  class="image-one"
+                  required
+                  onchange="/*previewFileHandler(this, 1)*/"
+                />
+              </div>
+              <div class="upload-img-box">
+                <img src="/img/image-upload.jpg" class="4" id="image-section-4" />
+                <input
+                  type="file"
+                  id="file"
+                  name="productImages"
+                  class="image-one"
+                  required
+                  onchange="/*previewFileHandler(this, 1)*/"
+                />
+              </div>
+              <div class="upload-img-box">
+                <img src="/img/image-upload.jpg" class="5" id="image-section-5" />
+                <input
+                  type="file"
+                  id="file"
+                  name="productImages"
+                  class="image-one"
+                  required
+                  onchange="/*previewFileHandler(this, 1)*/"
+                />
+              </div>
+            </div>
+          </div>
           <div class="button-box">
-            <button class="cancel-button">Cancel</button> 
+            <button class="cancel-button" type="button">Cancel</button> 
             <button class="create-button" type="submit">Create</button>
           </div>
         </form>

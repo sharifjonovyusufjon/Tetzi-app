@@ -217,6 +217,199 @@
 
 .products-page .container .new-box .form-box {
   width: 1300px;
-  height: 200px;
-  background-color: rgb(222, 186, 255);
+  height: auto;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.products-page .container .new-box .form-box strong {
+  font-family: "Jost";
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 40px;
+  letter-spacing: 0%;
+  text-align: left;
+  color: rgb(19, 39, 98);
+}
+
+.products-page .container .new-box .form-box .box {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.products-page .container .new-box .form-box .box .input-box-x {
+  width: 100%;
+  height: 70px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.products-page .container .new-box .form-box .box .input-box {
+  margin-top: 45px;
+  margin-bottom: 30px;
+  width: 45%;
+  height: 70px;
+
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #e0e0e0;
+  background: linear-gradient(
+    90deg,
+    rgb(253, 250, 245) 22.714%,
+    rgba(253, 250, 245, 0.11) 100%
+  );
+}
+
+.products-page .container .new-box .form-box .box .input-box-m {
+  width: 100%;
+  height: 140px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.products-page .container .new-box .form-box .box .input-box-x input {
+  width: 100%;
+  height: 70px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  outline: none;
+  border: 1px solid #e0e0e0;
+  background: linear-gradient(
+    90deg,
+    rgb(253, 250, 245) 22.714%,
+    rgba(253, 250, 245, 0.11) 100%
+  );
+}
+
+.products-page .container .new-box .form-box .box .input-box-x span {
+  font-family: "Jost";
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: 0%;
+  text-align: left;
+  color: rgb(19, 39, 98);
+}
+
+.products-page .container .new-box .form-box .box .input-box span {
+  font-family: "Jost";
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: 0%;
+  text-align: left;
+  color: rgb(19, 39, 98);
+}
+
+.products-page .container .new-box .form-box .box .input-box-m span {
+  font-family: "Jost";
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: 0%;
+  text-align: left;
+  color: rgb(19, 39, 98);
+}
+
+.products-page .container .new-box .form-box .box .input-box input {
+  width: 100%;
+  height: 70px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border: 1px solid #f6f6f6;
+  outline: none;
+  background: linear-gradient(
+    90deg,
+    rgb(253, 250, 245) 22.714%,
+    rgba(253, 250, 245, 0.11) 100%
+  );
+}
+
+.products-page .container .new-box .form-box .box .input-box select {
+  width: 100%;
+  height: 70px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  font-family: "Jost";
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: 0%;
+  text-align: left;
+  color: rgb(19, 39, 98);
+  border: 1px solid #f6f6f6;
+  outline: none;
+  background: linear-gradient(
+    90deg,
+    rgb(253, 250, 245) 22.714%,
+    rgba(253, 250, 245, 0.11) 100%
+  );
+}
+
+.products-page .container .new-box .form-box .box .input-box-m input {
+  width: 100%;
+  height: 140px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border: 1px solid #e0e0e0;
+  outline: none;
+  background: linear-gradient(
+    90deg,
+    rgb(253, 250, 245) 22.714%,
+    rgba(253, 250, 245, 0.11) 100%
+  );
+}
+
+.products-page .container .new-box .form-box .image-box {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.products-page .container .new-box .form-box .image-box .upload-img-box {
+  margin-top: 35px;
+  position: relative;
+  width: 140px;
+  height: 140px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.products-page .container .new-box .form-box .image-box .upload-img-box img {
+  position: relative;
+  width: 100%;
+  height: 140px;
+  object-fit: contain;
+  border: 1px solid #e9e9e9;
+}
+
+.products-page .container .new-box .form-box .image-box .upload-img-box #file {
+  opacity: 0;
+  border: none;
+  border-radius: 10px;
+  background: rgb(125, 125, 125);
+  position: absolute;
+  left: 0px;
+  width: 100%;
+  top: 0px;
+  height: 100%;
+  cursor: pointer;
 }
