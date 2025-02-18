@@ -112,26 +112,27 @@ class OrderService {
       ])
       .exec();
 
-    if (!result.length)
-      throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
+    if (!result.length) {
+      return [];
+    } else {
+      await Promise.all(
+        result.map(async (ele) => {
+          await Promise.all(
+            ele.orderItemData.map(async (item: any) => {
+              const productData = await this.productService.getProduct(
+                null,
+                item.productId
+              );
+              item.productData = productData;
+              return item;
+            })
+          );
+          return ele;
+        })
+      );
 
-    await Promise.all(
-      result.map(async (ele) => {
-        await Promise.all(
-          ele.orderItemData.map(async (item: any) => {
-            const productData = await this.productService.getProduct(
-              null,
-              item.productId
-            );
-            item.productData = productData;
-            return item;
-          })
-        );
-        return ele;
-      })
-    );
-
-    return result;
+      return result;
+    }
   }
 
   public async updateOrder(
